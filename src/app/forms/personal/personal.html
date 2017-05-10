@@ -1,0 +1,18 @@
+<form novalidate [formGroup]="form" (submit)="next(health)">
+	<md-card>
+		<md-card-subtitle>Step <strong>2</strong> of <strong>3</strong></md-card-subtitle>
+		<md-card-title>Health</md-card-title>
+		<md-card-content>
+			<input mdinput formControlName="height" placeholder="Height">
+
+			<input mdinput formControlName="weight" placeholder="Weight">
+
+			<input mdinput formControlName="bmi" placeholder="BMI">
+			
+		</md-card-content>
+		<md-card-actions>
+			<button type="button" md-raised-button color="accent" (click)="back()">BACK</button>
+			<button type="submit" md-raised-button color="accent">NEXT</button>
+		</md-card-actions>
+	</md-card>
+</form>

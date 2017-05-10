@@ -1,0 +1,8 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+.column {
+  margin: 10px;
+  flex: 1 1 50%;
+}
