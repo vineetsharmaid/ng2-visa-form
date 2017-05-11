@@ -13,10 +13,11 @@ md-toolbar-row {
 }
 
 .done {
-  position: absolute;
+  /*position: fixed;
   bottom: 20px;
   right: 20px;
-  color: white;
+  color: white;*/
+  float: right;
 }
 
 md-card md-select {

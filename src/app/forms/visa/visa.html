@@ -1,0 +1,93 @@
+<div>
+  <md-toolbar color="primary">
+    <span><md-icon>flight_takeoff</md-icon></span>
+
+    <span>Visa Details</span>
+
+    <button md-icon-button >
+      <!-- <md-icon>more_vert</md-icon> -->
+    </button>
+  </md-toolbar>
+    
+  <md-card>
+    <md-card-title>New Visa / Employment Visa / Urgent</md-card-title>
+    <form class="example-form">
+      <md-grid-list cols="2" rowHeight="100px">
+        <md-grid-tile>
+          <md-select placeholder="Applicant Status" name="applicantStatus" class="example-full-width">
+            <md-option *ngFor="let appStatus of appStatusOptions" [value]="appStatus.value">
+              {{appStatus.viewValue}}
+            </md-option>
+          </md-select>
+        </md-grid-tile>
+        <md-grid-tile>
+          <md-select placeholder="Change of Status" name="changeStatus" class="example-full-width">
+            <md-option *ngFor="let changeStatus of changeOptions" [value]="changeStatus.value">
+              {{changeStatus.viewValue}}
+            </md-option>
+          </md-select>
+        </md-grid-tile>
+      </md-grid-list>
+
+      <md-grid-list cols="2" rowHeight="100px">
+        <md-grid-tile>
+          <md-select placeholder="Medical Service" name="medicalService" class="example-full-width">
+            <md-option *ngFor="let medicalService of medicalServices" [value]="medicalService.value">
+              {{medicalService.viewValue}}
+            </md-option>
+          </md-select>
+        </md-grid-tile>
+        <md-grid-tile>
+          
+        </md-grid-tile>
+      </md-grid-list>
+
+      <md-card-title>Job Offer Details</md-card-title>
+
+      <md-grid-list cols="2" rowHeight="100px">
+        <md-grid-tile>
+          <md-select placeholder="Contract Type" name="contractType" class="example-full-width">
+            <md-option *ngFor="let contractType of contractTypes" [value]="contractType.value">
+              {{contractType.viewValue}}
+            </md-option>
+          </md-select>
+        </md-grid-tile>
+        <md-grid-tile>
+          <md-select placeholder="Weekly Holidays" name="weeklyHoliday" class="example-full-width">
+            <md-option *ngFor="let weeklyHoliday of weeklyHolidays" [value]="weeklyHoliday.value">
+              {{weeklyHoliday.viewValue}}
+            </md-option>
+          </md-select>
+        </md-grid-tile>
+      </md-grid-list>
+
+      <md-grid-list cols="2" rowHeight="100px">
+        <md-grid-tile>
+          <md-select placeholder="Probation Period" name="probationPeriod" class="example-full-width">
+            <md-option *ngFor="let probationPeriod of probationPeriods" [value]="probationPeriod.value">
+              {{probationPeriod.viewValue}}
+            </md-option>
+          </md-select>
+        </md-grid-tile>
+        <md-grid-tile>
+          <md-select placeholder="Notice Period" name="noticePeriod" class="example-full-width">
+            <md-option *ngFor="let noticePeriod of noticePeriods" [value]="noticePeriod.value">
+              {{noticePeriod.viewValue}}
+            </md-option>
+          </md-select>
+        </md-grid-tile>
+      </md-grid-list>
+
+    </form>
+  </md-card>
+  <span class="back">
+    <button md-fab (click)="back()">
+      <md-icon>keyboard_arrow_left circle</md-icon>
+    </button>
+  </span>
+  <span class="done">
+    <button md-fab (click)="next()">
+      <md-icon>keyboard_arrow_right circle</md-icon>
+    </button>
+  </span>
+</div>

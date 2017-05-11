@@ -1,18 +1,134 @@
-<form novalidate [formGroup]="form" (submit)="next(health)">
-	<md-card>
-		<md-card-subtitle>Step <strong>2</strong> of <strong>3</strong></md-card-subtitle>
-		<md-card-title>Health</md-card-title>
-		<md-card-content>
-			<input mdinput formControlName="height" placeholder="Height">
+<div>
+  <md-toolbar color="primary">
+    <span><md-icon>supervisor_account</md-icon></span>
 
-			<input mdinput formControlName="weight" placeholder="Weight">
+    <span>Personal Details</span>
 
-			<input mdinput formControlName="bmi" placeholder="BMI">
-			
-		</md-card-content>
-		<md-card-actions>
-			<button type="button" md-raised-button color="accent" (click)="back()">BACK</button>
-			<button type="submit" md-raised-button color="accent">NEXT</button>
-		</md-card-actions>
-	</md-card>
-</form>
+    <button md-icon-button >
+      <!-- <md-icon>more_vert</md-icon> -->
+    </button>
+  </md-toolbar>
+    
+  <md-card>
+    <form class="example-form">
+      
+      <md-grid-list cols="2" rowHeight="100px">
+        <md-grid-tile>
+          <md-input-container class="example-full-width">
+            <input mdInput placeholder="Full Name">
+          </md-input-container>
+        </md-grid-tile>
+        
+        <md-grid-tile>
+          <md-input-container class="example-full-width">
+            <input mdInput placeholder="Passport Number">
+          </md-input-container>
+        </md-grid-tile>
+      </md-grid-list>
+
+      <md-grid-list cols="2" rowHeight="100px">
+        <md-grid-tile>
+          <md-input-container class="example-full-width">
+            <input mdInput placeholder="Passport Expiry Date">
+          </md-input-container>
+        </md-grid-tile>
+        
+        <md-grid-tile>
+          <md-input-container class="example-full-width">
+            <input mdInput placeholder="Passport Issue Date">
+          </md-input-container>
+        </md-grid-tile>
+      </md-grid-list>
+
+      <md-grid-list cols="2" rowHeight="100px">
+        <md-grid-tile>
+          <md-input-container class="example-full-width">
+            <input mdInput placeholder="Father Name">
+          </md-input-container>
+        </md-grid-tile>
+        
+        <md-grid-tile>
+          <md-input-container class="example-full-width">
+            <input mdInput placeholder="Mother Name">
+          </md-input-container>
+        </md-grid-tile>
+      </md-grid-list>
+
+      <md-grid-list cols="2" rowHeight="100px">
+        <md-grid-tile>
+          <md-input-container class="example-full-width">
+            <input mdInput placeholder="Email Address">
+          </md-input-container>
+        </md-grid-tile>
+        
+        <md-grid-tile>
+          <md-input-container class="example-full-width">
+            <input mdInput placeholder="Mobile Number">
+          </md-input-container>
+        </md-grid-tile>
+      </md-grid-list>
+
+      <md-grid-list cols="2" rowHeight="100px">
+        <md-grid-tile>
+          <md-input-container class="example-full-width">
+            <input mdInput placeholder="Gender">
+          </md-input-container>
+        </md-grid-tile>
+        
+        <md-grid-tile>
+          <md-input-container class="example-full-width">
+            <input mdInput placeholder="Country of Birth">
+          </md-input-container>
+        </md-grid-tile>
+      </md-grid-list>
+
+      <md-grid-list cols="2" rowHeight="100px">
+        <md-grid-tile>
+          <md-input-container class="example-full-width">
+            <input mdInput placeholder="Nationality">
+          </md-input-container>
+        </md-grid-tile>
+        
+        <md-grid-tile>
+          <md-input-container class="example-full-width">
+            <input mdInput placeholder="Previous Nationality">
+          </md-input-container>
+        </md-grid-tile>
+      </md-grid-list>
+
+      <md-grid-list cols="2" rowHeight="100px">
+        <md-grid-tile>
+          <md-input-container class="example-full-width">
+            <input mdInput placeholder="Religion">
+          </md-input-container>
+        </md-grid-tile>
+        
+        <md-grid-tile>
+          <md-input-container class="example-full-width">
+            <input mdInput placeholder="Maritial Status">
+          </md-input-container>
+        </md-grid-tile>
+      </md-grid-list>
+
+      <md-grid-list cols="2" rowHeight="100px">
+        <md-grid-tile>
+          <md-input-container class="example-full-width">
+            <input mdInput placeholder="Education">
+          </md-input-container>
+        </md-grid-tile>
+        <md-grid-tile></md-grid-tile>
+      </md-grid-list>
+
+    </form>
+  </md-card>
+  <span class="back">
+    <button md-fab (click)="back()">
+      <md-icon>keyboard_arrow_left circle</md-icon>
+    </button>
+  </span>
+  <span class="done">
+    <button md-fab (click)="next()">
+      <md-icon>keyboard_arrow_right circle</md-icon>
+    </button>
+  </span>
+</div>

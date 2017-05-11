@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { FormsComponent } from './forms/forms.component';
 import { OrganizationComponent } from './forms/organization/organization.component';
 import { PersonalComponent } from './forms/personal/personal.component';
+import { VisaComponent } from './forms/visa/visa.component';
 import 'hammerjs';
 
 import { Ng2MultiStepFormRoutingModule } from './app-routing.module';
@@ -21,7 +22,8 @@ import { Ng2MultiStepFormRoutingModule } from './app-routing.module';
     AppComponent,
     FormsComponent,
     OrganizationComponent,
-    PersonalComponent
+    PersonalComponent,
+    VisaComponent
   ],
   imports: [
     BrowserModule,
