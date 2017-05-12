@@ -6,7 +6,7 @@ import { PersonalComponent } from './forms/personal/personal.component';
 import { VisaComponent } from './forms/visa/visa.component';
 
 const routes: Routes = [
-  {path: '',        redirectTo: '/organization', pathMatch: 'full'},
+  {path: '',  component: FormsComponent},
   {path: 'organization',    component: OrganizationComponent},
   {path: 'personal',    component: PersonalComponent},
   {path: 'visa',    component: VisaComponent},

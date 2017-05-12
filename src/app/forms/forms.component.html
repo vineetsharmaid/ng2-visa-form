@@ -1,12 +1,467 @@
-<div class="demo-nav-bar">
-  <nav md-tab-nav-bar aria-label="weather navigation links">
-    <a md-tab-link
-       *ngFor="let tabLink of tabLinks; let i = index"
-       [routerLink]="tabLink.link"
-       [routerLinkActive]="['activeLink']"
-       (click)="activeLinkIndex = i">
-      {{tabLink.label}}
-    </a>
-  </nav>
-  <router-outlet></router-outlet>
-</div>
+<md-tab-group [selectedIndex]="selectedTab">
+  <md-tab label="Organization Details">
+    <md-toolbar color="primary">
+      <span><md-icon>work</md-icon></span>
+
+      <span class="center-txt">Organization Details</span>
+
+      <button md-icon-button >
+        <!-- <md-icon>more_vert</md-icon> -->
+      </button>
+    </md-toolbar>
+    
+    <md-card>
+      <form class="example-form">
+        
+        <md-grid-list cols="2" rowHeight="100px">
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              
+              <input mdInput class="form-control" placeholder="Organization Name" [(ngModel)]="visa.orgName" #orgName="ngModel" name="orgName"  required>
+              
+              <md-error *ngIf="orgName.errors && (orgName.dirty || orgName.touched)">
+                <div [hidden]="!orgName.errors.required">
+                  Organization name is required
+                </div>
+              </md-error>
+
+            </md-input-container>
+          </md-grid-tile>
+          
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              
+              <input mdInput placeholder="Trade Licence Number" [(ngModel)]="visa.licenceNum" #licenceNum="ngModel" name="licenceNum"  required>
+
+              <md-error *ngIf="licenceNum.errors && (licenceNum.dirty || licenceNum.touched)">
+                <div [hidden]="!licenceNum.errors.required">
+                  Trade Licence Number is required
+                </div>
+              </md-error>
+
+            </md-input-container>
+          </md-grid-tile>
+        </md-grid-list>
+
+        <md-grid-list cols="2" rowHeight="100px">
+          <md-grid-tile>
+            
+            <md-select placeholder="Visa Type" name="visaType" class="example-full-width" [(ngModel)]="visa.visaType" #visaType="ngModel" name="visaType"  required>
+              <md-option *ngFor="let visaType of visaTypes" [value]="visaType.value">
+                {{visaType.viewValue}}
+              </md-option>
+            </md-select>
+            
+            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-left: 1.2em; margin-top: -2.5em;" *ngIf="visaType.errors && (visaType.dirty || visaType.touched)">
+              <div class="" style="opacity: 1; transform: translateY(0%);">
+                <md-error>
+                  <div [hidden]="!visaType.errors.required">
+                    Select Visa Type
+                  </div>
+                </md-error>
+              </div>
+            </div>
+
+          </md-grid-tile>
+          <md-grid-tile>
+            <md-select placeholder="Applicant Status" name="appStatus" class="example-full-width" [(ngModel)]="visa.appStatus" #appStatus="ngModel" name="appStatus"  required>
+              <md-option *ngFor="let status of applicantStatus" [value]="status.value">
+                {{status.viewValue}}
+              </md-option>
+            </md-select>
+
+            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-left: 1.2em; margin-top: -2.5em;" *ngIf="appStatus.errors && (appStatus.dirty || appStatus.touched)">
+              <div class="" style="opacity: 1; transform: translateY(0%);">
+                <md-error>
+                  <div [hidden]="!appStatus.errors.required">
+                    Select Applicant Status
+                  </div>
+                </md-error>
+              </div>
+            </div>
+
+          </md-grid-tile>
+        </md-grid-list>
+
+        <md-grid-list cols="2" rowHeight="100px">
+          <md-grid-tile>
+            <md-select placeholder="Type of Application" name="appType" class="example-full-width" [(ngModel)]="visa.appType" #appType="ngModel" name="appType"  required>
+              <md-option *ngFor="let appType of appTypes" [value]="appType.value">
+                {{appType.viewValue}}
+              </md-option>
+            </md-select>
+
+            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-left: 1.2em; margin-top: -2.5em;" *ngIf="appType.errors && (appType.dirty || appType.touched)">
+              <div class="" style="opacity: 1; transform: translateY(0%);">
+                <md-error>
+                  <div [hidden]="!appType.errors.required">
+                    Select Type of Application
+                  </div>
+                </md-error>
+              </div>
+            </div>
+
+          </md-grid-tile>
+          <md-grid-tile>
+            <md-select placeholder="Processing Time" name="processTime" class="example-full-width" [(ngModel)]="visa.processTime" #processTime="ngModel" name="processTime"  required>
+              <md-option *ngFor="let processTime of processTimes" [value]="processTime.value">
+                {{processTime.viewValue}}
+              </md-option>
+            </md-select>
+
+            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-left: 1.2em; margin-top: -2.5em;" *ngIf="processTime.errors && (processTime.dirty || processTime.touched)">
+              <div class="" style="opacity: 1; transform: translateY(0%);">
+                <md-error>
+                  <div [hidden]="!processTime.errors.required">
+                    Select Processing Time
+                  </div>
+                </md-error>
+              </div>
+            </div>
+
+          </md-grid-tile>
+        </md-grid-list>
+
+      </form>
+    </md-card>
+
+    <span class="done">
+      <button md-fab (click)="nextTab()">
+        <md-icon>keyboard_arrow_right circle</md-icon>
+      </button>
+    </span>
+  </md-tab>
+  
+  <md-tab label="Personal Details">
+    <md-toolbar color="primary">
+      <span><md-icon>supervisor_account</md-icon></span>
+
+      <span class="center-txt">Personal Details</span>
+
+      <button md-icon-button >
+        <!-- <md-icon>more_vert</md-icon> -->
+      </button>
+    </md-toolbar>
+      
+    <md-card>
+      <form class="example-form">
+        
+        <md-grid-list cols="2" rowHeight="100px">
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Full Name">
+            </md-input-container>
+          </md-grid-tile>
+          
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Passport Number">
+            </md-input-container>
+          </md-grid-tile>
+        </md-grid-list>
+
+        <md-grid-list cols="2" rowHeight="100px">
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Passport Expiry Date">
+            </md-input-container>
+          </md-grid-tile>
+          
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Passport Issue Date">
+            </md-input-container>
+          </md-grid-tile>
+        </md-grid-list>
+
+        <md-grid-list cols="2" rowHeight="100px">
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Father Name">
+            </md-input-container>
+          </md-grid-tile>
+          
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Mother Name">
+            </md-input-container>
+          </md-grid-tile>
+        </md-grid-list>
+
+        <md-grid-list cols="2" rowHeight="100px">
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Email Address">
+            </md-input-container>
+          </md-grid-tile>
+          
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Mobile Number">
+            </md-input-container>
+          </md-grid-tile>
+        </md-grid-list>
+
+        <md-grid-list cols="2" rowHeight="100px">
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Gender">
+            </md-input-container>
+          </md-grid-tile>
+          
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Country of Birth">
+            </md-input-container>
+          </md-grid-tile>
+        </md-grid-list>
+
+        <md-grid-list cols="2" rowHeight="100px">
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Nationality">
+            </md-input-container>
+          </md-grid-tile>
+          
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Previous Nationality">
+            </md-input-container>
+          </md-grid-tile>
+        </md-grid-list>
+
+        <md-grid-list cols="2" rowHeight="100px">
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Religion">
+            </md-input-container>
+          </md-grid-tile>
+          
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Maritial Status">
+            </md-input-container>
+          </md-grid-tile>
+        </md-grid-list>
+
+        <md-grid-list cols="2" rowHeight="100px">
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Education">
+            </md-input-container>
+          </md-grid-tile>
+          <md-grid-tile></md-grid-tile>
+        </md-grid-list>
+
+      </form>
+    </md-card>
+    <span class="back">
+      <button md-fab (click)="previousTab()">
+        <md-icon>keyboard_arrow_left circle</md-icon>
+      </button>
+    </span>
+    <span class="done">
+      <button md-fab (click)="nextTab()">
+        <md-icon>keyboard_arrow_right circle</md-icon>
+      </button>
+    </span>
+  </md-tab>
+
+  <md-tab label="Visa Details">
+    <md-toolbar color="primary">
+      <span><md-icon>flight_takeoff</md-icon></span>
+
+      <span class="center-txt">Visa Details</span>
+
+      <button md-icon-button >
+        <!-- <md-icon>more_vert</md-icon> -->
+      </button>
+    </md-toolbar>
+      
+    <md-card>
+      <md-card-title>New Visa / Employment Visa / Urgent</md-card-title>
+      <form class="example-form">
+        <md-grid-list cols="2" rowHeight="100px">
+          <md-grid-tile>
+            <md-select placeholder="Applicant Status" name="applicantStatus" class="example-full-width">
+              <md-option *ngFor="let appStatus of appStatusOptions" [value]="appStatus.value">
+                {{appStatus.viewValue}}
+              </md-option>
+            </md-select>
+          </md-grid-tile>
+          <md-grid-tile>
+            <md-select placeholder="Change of Status" name="changeStatus" class="example-full-width">
+              <md-option *ngFor="let changeStatus of changeOptions" [value]="changeStatus.value">
+                {{changeStatus.viewValue}}
+              </md-option>
+            </md-select>
+          </md-grid-tile>
+        </md-grid-list>
+
+        <md-grid-list cols="2" rowHeight="100px">
+          <md-grid-tile>
+            <md-select placeholder="Medical Service" name="medicalService" class="example-full-width">
+              <md-option *ngFor="let medicalService of medicalServices" [value]="medicalService.value">
+                {{medicalService.viewValue}}
+              </md-option>
+            </md-select>
+          </md-grid-tile>
+          <md-grid-tile>
+            
+          </md-grid-tile>
+        </md-grid-list>
+
+        <md-card-title>Job Offer Details</md-card-title>
+
+        <md-grid-list cols="2" rowHeight="100px">
+          <md-grid-tile>
+            <md-select placeholder="Contract Type" name="contractType" class="example-full-width">
+              <md-option *ngFor="let contractType of contractTypes" [value]="contractType.value">
+                {{contractType.viewValue}}
+              </md-option>
+            </md-select>
+          </md-grid-tile>
+          <md-grid-tile>
+            <md-select placeholder="Weekly Holidays" name="weeklyHoliday" class="example-full-width">
+              <md-option *ngFor="let weeklyHoliday of weeklyHolidays" [value]="weeklyHoliday.value">
+                {{weeklyHoliday.viewValue}}
+              </md-option>
+            </md-select>
+          </md-grid-tile>
+        </md-grid-list>
+
+        <md-grid-list cols="2" rowHeight="100px">
+          <md-grid-tile>
+            <md-select placeholder="Probation Period" name="probationPeriod" class="example-full-width">
+              <md-option *ngFor="let probationPeriod of probationPeriods" [value]="probationPeriod.value">
+                {{probationPeriod.viewValue}}
+              </md-option>
+            </md-select>
+          </md-grid-tile>
+          <md-grid-tile>
+            <md-select placeholder="Notice Period" name="noticePeriod" class="example-full-width">
+              <md-option *ngFor="let noticePeriod of noticePeriods" [value]="noticePeriod.value">
+                {{noticePeriod.viewValue}}
+              </md-option>
+            </md-select>
+          </md-grid-tile>
+        </md-grid-list>
+
+      </form>
+    </md-card>
+    <span class="back">
+      <button md-fab (click)="previousTab()">
+        <md-icon>keyboard_arrow_left circle</md-icon>
+      </button>
+    </span>
+    <span class="done">
+      <button md-fab (click)="nextTab()">
+        <md-icon>keyboard_arrow_right circle</md-icon>
+      </button>
+    </span>
+  </md-tab>
+
+  <md-tab label="Salary Details">
+    <md-toolbar color="primary">
+      <span><md-icon>work</md-icon></span>
+
+      <span class="center-txt">Salary Details</span>
+
+      <button md-icon-button >
+        <!-- <md-icon>more_vert</md-icon> -->
+      </button>
+    </md-toolbar>
+    
+    <md-card>
+      <form class="example-form">
+        
+        <md-grid-list cols="2" rowHeight="100px">
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Designation">
+            </md-input-container>
+          </md-grid-tile>
+          
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Basic Salary">
+            </md-input-container>
+          </md-grid-tile>
+        </md-grid-list>
+
+        <md-grid-list cols="2" rowHeight="100px">
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Housing Allowance">
+            </md-input-container>
+          </md-grid-tile>
+          
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Transport Allowance">
+            </md-input-container>
+          </md-grid-tile>
+        </md-grid-list>
+
+        <md-grid-list cols="2" rowHeight="100px">
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Other">
+            </md-input-container>
+          </md-grid-tile>
+          
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Total Salary">
+            </md-input-container>
+          </md-grid-tile>
+        </md-grid-list>
+
+        <md-card-title class="align-with-form">Courier Service</md-card-title>
+
+        <md-grid-list cols="1" rowHeight="100px">
+          <md-grid-tile>
+            <b class="align-with-form">Every visa application includes 1 free courier service and additional for AED 20 only. Please select below if you wish to use the pick and drop off service for cheque, Passport(s), Document(s), etc.</b>
+          </md-grid-tile>
+        </md-grid-list>
+
+        <!-- <section class="example-section align-with-form">
+          <md-checkbox class="example-margin" [(ngModel)]="checked">Documents Pick up</md-checkbox>
+        </section>
+        <section class="example-section align-with-form">
+          <md-checkbox class="example-margin" [(ngModel)]="indeterminate">Cheque Collection</md-checkbox>
+        </section>
+        <section class="example-section align-with-form">
+          <md-checkbox class="example-margin" [(ngModel)]="checked">Passport Pick up</md-checkbox>
+        </section>
+        <section class="example-section align-with-form">
+          <md-checkbox class="example-margin" [(ngModel)]="indeterminate">Passport Drop up</md-checkbox>
+        </section>
+ -->
+        <md-grid-list cols="2" rowHeight="100px">
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Authorized Person Name">
+            </md-input-container>
+          </md-grid-tile>
+          
+          <md-grid-tile>
+            <md-input-container class="example-full-width">
+              <input mdInput placeholder="Authorized Person Designation">
+            </md-input-container>
+          </md-grid-tile>
+        </md-grid-list>
+
+
+       
+      </form>
+    </md-card>
+
+    <span class="done">
+      <button md-fab (click)="nextTab()">
+        <md-icon>keyboard_arrow_right circle</md-icon>
+      </button>
+    </span>
+  </md-tab>
+
+</md-tab-group>
