@@ -2,6 +2,8 @@ import { Component, ViewContainerRef } from '@angular/core';
 import { MdDialogConfig, MdDialog, MdDialogRef } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import {IMyOptions} from 'mydatepicker';
+import { DataService } from './data.service';
 
 export class VisaDetails {
 	orgName: string;
@@ -34,7 +36,7 @@ export class FormsComponent{
     {value: '1', viewValue: 'New Visa'},
   ];
 
-  applicantStatus = [
+  applicantStatusOptions = [
     {value: '1', viewValue: 'First time in UAE'},
     {value: '2', viewValue: 'Had previous work permit'},
   ];
@@ -100,7 +102,70 @@ export class FormsComponent{
     { value: '6', viewValue: '6 month' },
   ];
 
-  constructor( private formBuilder: FormBuilder, private router: Router ) { 
+  isRequired = false;
+  isDisabled = false;
+  isOpenOnFocus = false;
+  isOpen = false;
+  today: Date = new Date();
+  type: string = 'date';
+  types: Array<any> = [
+    { text: 'Date', value: 'date' },
+    { text: 'Time', value: 'time' },
+    { text: 'Date Time', value: 'datetime' }];
+
+  mode: string = 'portrait';
+
+  container: string = 'inline';
+
+  date: Date 		= null;
+  minDate: Date = null;
+  maxDate: Date = null;
+  enableDates: Array<Date> = [
+    new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 7),
+    new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 1),
+    new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 5),
+    new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 7),
+    new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 8)
+  ];
+  // disableDates: Array<Date> = [
+  //   new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 2),
+  //   new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 1),
+  //   new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 2),
+  //   new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 5),
+  //   new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() + 9)
+  // ];
+  // disableWeekDays: Array<number> = [0, 6];
+
+  openDatepicker() {
+    this.isOpen = true;
+    setTimeout(() => {
+      this.isOpen = false;
+    }, 500);
+  }
+
+  setDate() {
+    this.date = new Date(this.today);
+  }
+
+  // setDateRange() {
+  //   this.minDate = new Date(this.today);
+  //   this.minDate.setMonth(this.minDate.getMonth() - 3);
+  //   this.maxDate = new Date(this.today);
+  //   this.maxDate.setMonth(this.maxDate.getMonth() + 3);
+  // }
+
+
+  public countries: Array<Object>;
+  public religions: Array<Object>;
+  public mStatusOptions: Array<Object>;
+  public eduOptions: Array<Object>;
+  public designations: Array<Object>;
+  private myDatePickerOptions: IMyOptions = {
+    // other options...
+    dateFormat: 'dd.mm.yyyy',
+  };
+
+  constructor( private formBuilder: FormBuilder, private router: Router, private _dataService: DataService ) { 
 		this.submitted=false;
    	this.form = formBuilder.group({
     	// lastname: ['', Validators.required],
@@ -109,24 +174,79 @@ export class FormsComponent{
 
   ngOnInit() {
     
+    this.loadCountries();
+    this.loadReligions();
+    this.loadMaritialStatus();
+    this.loadEducationOptions();
+    this.loadDesignations();
+  }
+
+  loadDesignations() {
+
+  	this.designations = this._dataService.getDesignations();
+  }
+
+  loadEducationOptions() {
+
+  	this.eduOptions = this._dataService.getEducationOptions();
+  }
+
+  loadMaritialStatus() {
+
+  	this.mStatusOptions = this._dataService.getMaritialStatus();
+  }
+
+  loadReligions() {
+
+  	this.religions = this._dataService.getReligion();
+  }
+
+  loadCountries() {
+  	// loads list of countries
+  	this.countries = this._dataService.getCountries();
   }
 
   onSubmit(form) {
-
+  	
     this.submitted=true;
+    // console.log(form.controls);
+    let field = '';
+    for( field in form.controls ) {
+    	const ctrl = form.controls[field];
+			ctrl.markAsTouched();
+    }
     
     if(form.valid)
     {
       console.log('form submitted');
+    } else {
+    	console.log('here');
     }
   }
 
 
 
-  nextTab() {
+  nextTab(form) {
+   	
+    if(form.valid)
+    {
+	  	this.submitted=true;
+      
+      // move to next tab
+	    this.selectedTab += 1;
+	  	if (this.selectedTab >= 4) this.selectedTab = 0;
     
-    this.selectedTab += 1;
-  	if (this.selectedTab >= 4) this.selectedTab = 0;
+    } else {
+    	console.log('validation failed');
+    	let field = '';
+	    // set all field's state in form to touched to show errors on form submit
+	    for( field in form.controls ) {
+	    	const ctrl = form.controls[field];
+				ctrl.markAsTouched();
+	    }
+    }
+
+
   }
 
   previousTab() {

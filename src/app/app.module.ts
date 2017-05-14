@@ -5,18 +5,20 @@ import { HttpModule } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MyDatePickerModule } from 'mydatepicker';
+import { Md2Module }  from 'md2';
 // import { StoreModule } from '@ngrx/store';
 
 
 import { AppComponent } from './app.component';
 import { FormsComponent } from './forms/forms.component';
+import { DataService } from './forms/data.service';
 import { OrganizationComponent } from './forms/organization/organization.component';
 import { PersonalComponent } from './forms/personal/personal.component';
 import { VisaComponent } from './forms/visa/visa.component';
 import 'hammerjs';
 
 import { Ng2MultiStepFormRoutingModule } from './app-routing.module';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,9 +35,11 @@ import { Ng2MultiStepFormRoutingModule } from './app-routing.module';
     HttpModule,
     MaterialModule.forRoot(),
     Ng2MultiStepFormRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MyDatePickerModule,
+    Md2Module.forRoot(),
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

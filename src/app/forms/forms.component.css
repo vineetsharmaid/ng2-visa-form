@@ -68,3 +68,13 @@ md-toolbar {
 	overflow-y: hidden !important;
 	background: #f7f7f7;
 }
+
+.form-headings {
+  margin-top: 10px !important;
+}
+
+.form-ele { margin-top: 5%; margin-bottom: 5%; }
+.form-ele-input { margin-bottom: 5%; }
+/deep/ .mat-input-placeholder { font-weight: 300 !important; }
+.mar-top-4 { margin-top: 4%; }
+.mar-top-2 { margin-top: 2%; }

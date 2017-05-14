@@ -11,13 +11,13 @@
     </md-toolbar>
     
     <md-card>
-      <form class="example-form">
+      <form class="example-form" #form="ngForm">
         
-        <md-grid-list cols="2" rowHeight="100px">
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <md-input-container class="example-full-width form-ele-input">
               
-              <input mdInput class="form-control" placeholder="Organization Name" [(ngModel)]="visa.orgName" #orgName="ngModel" name="orgName"  required>
+              <input mdInput class="" placeholder="Organization Name" [(ngModel)]="visa.orgName" #orgName="ngModel" name="orgName"  required>
               
               <md-error *ngIf="orgName.errors && (orgName.dirty || orgName.touched)">
                 <div [hidden]="!orgName.errors.required">
@@ -26,10 +26,10 @@
               </md-error>
 
             </md-input-container>
-          </md-grid-tile>
+          </div>
           
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
+          <div class="col-xs-12 col-md-6">
+            <md-input-container class="example-full-width form-ele-input">
               
               <input mdInput placeholder="Trade Licence Number" [(ngModel)]="visa.licenceNum" #licenceNum="ngModel" name="licenceNum"  required>
 
@@ -40,19 +40,19 @@
               </md-error>
 
             </md-input-container>
-          </md-grid-tile>
-        </md-grid-list>
+          </div>
+        </div>
 
-        <md-grid-list cols="2" rowHeight="100px">
-          <md-grid-tile>
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
             
-            <md-select placeholder="Visa Type" name="visaType" class="example-full-width" [(ngModel)]="visa.visaType" #visaType="ngModel" name="visaType"  required>
+            <md-select placeholder="Visa Type" name="visaType" class="example-full-width form-ele" [(ngModel)]="visa.visaType" #visaType="ngModel" name="visaType"  required>
               <md-option *ngFor="let visaType of visaTypes" [value]="visaType.value">
                 {{visaType.viewValue}}
               </md-option>
             </md-select>
             
-            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-left: 1.2em; margin-top: -2.5em;" *ngIf="visaType.errors && (visaType.dirty || visaType.touched)">
+            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-top: -1.5em;" *ngIf="visaType.errors && (visaType.dirty || visaType.touched)">
               <div class="" style="opacity: 1; transform: translateY(0%);">
                 <md-error>
                   <div [hidden]="!visaType.errors.required">
@@ -62,15 +62,15 @@
               </div>
             </div>
 
-          </md-grid-tile>
-          <md-grid-tile>
-            <md-select placeholder="Applicant Status" name="appStatus" class="example-full-width" [(ngModel)]="visa.appStatus" #appStatus="ngModel" name="appStatus"  required>
-              <md-option *ngFor="let status of applicantStatus" [value]="status.value">
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <md-select placeholder="Applicant Status" name="appStatus" class="example-full-width form-ele" [(ngModel)]="visa.appStatus" #appStatus="ngModel" name="appStatus"  required>
+              <md-option *ngFor="let status of applicantStatusOptions" [value]="status.value">
                 {{status.viewValue}}
               </md-option>
             </md-select>
 
-            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-left: 1.2em; margin-top: -2.5em;" *ngIf="appStatus.errors && (appStatus.dirty || appStatus.touched)">
+            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-top: -1.5em;" *ngIf="appStatus.errors && (appStatus.dirty || appStatus.touched)">
               <div class="" style="opacity: 1; transform: translateY(0%);">
                 <md-error>
                   <div [hidden]="!appStatus.errors.required">
@@ -80,18 +80,18 @@
               </div>
             </div>
 
-          </md-grid-tile>
-        </md-grid-list>
+          </div>
+        </div>
 
-        <md-grid-list cols="2" rowHeight="100px">
-          <md-grid-tile>
-            <md-select placeholder="Type of Application" name="appType" class="example-full-width" [(ngModel)]="visa.appType" #appType="ngModel" name="appType"  required>
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <md-select placeholder="Type of Application" name="appType" class="example-full-width form-ele" [(ngModel)]="visa.appType" #appType="ngModel" name="appType"  required>
               <md-option *ngFor="let appType of appTypes" [value]="appType.value">
                 {{appType.viewValue}}
               </md-option>
             </md-select>
 
-            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-left: 1.2em; margin-top: -2.5em;" *ngIf="appType.errors && (appType.dirty || appType.touched)">
+            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-top: -1.5em;" *ngIf="appType.errors && (appType.dirty || appType.touched)">
               <div class="" style="opacity: 1; transform: translateY(0%);">
                 <md-error>
                   <div [hidden]="!appType.errors.required">
@@ -101,15 +101,15 @@
               </div>
             </div>
 
-          </md-grid-tile>
-          <md-grid-tile>
-            <md-select placeholder="Processing Time" name="processTime" class="example-full-width" [(ngModel)]="visa.processTime" #processTime="ngModel" name="processTime"  required>
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <md-select placeholder="Processing Time" name="processTime" class="example-full-width form-ele" [(ngModel)]="visa.processTime" #processTime="ngModel" name="processTime"  required>
               <md-option *ngFor="let processTime of processTimes" [value]="processTime.value">
                 {{processTime.viewValue}}
               </md-option>
             </md-select>
 
-            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-left: 1.2em; margin-top: -2.5em;" *ngIf="processTime.errors && (processTime.dirty || processTime.touched)">
+            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-top: -1.5em;" *ngIf="processTime.errors && (processTime.dirty || processTime.touched)">
               <div class="" style="opacity: 1; transform: translateY(0%);">
                 <md-error>
                   <div [hidden]="!processTime.errors.required">
@@ -119,14 +119,14 @@
               </div>
             </div>
 
-          </md-grid-tile>
-        </md-grid-list>
+          </div>
+        </div>
 
       </form>
     </md-card>
 
     <span class="done">
-      <button md-fab (click)="nextTab()">
+      <button md-fab (click)="nextTab(form)">
         <md-icon>keyboard_arrow_right circle</md-icon>
       </button>
     </span>
@@ -146,112 +146,280 @@
     <md-card>
       <form class="example-form">
         
-        <md-grid-list cols="2" rowHeight="100px">
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="Full Name">
-            </md-input-container>
-          </md-grid-tile>
-          
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="Passport Number">
-            </md-input-container>
-          </md-grid-tile>
-        </md-grid-list>
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <md-input-container class="example-full-width form-ele-input">
 
-        <md-grid-list cols="2" rowHeight="100px">
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
+              <input mdInput placeholder="First Name" [(ngModel)]="visa.firstname" #firstname="ngModel" name="firstname" required>
+              
+              <md-error *ngIf="firstname.errors && (firstname.dirty || firstname.touched)">
+                <div [hidden]="!firstname.errors.required">
+                  First Name is required
+                </div>
+              </md-error>
+
+            </md-input-container>
+          </div>
+            
+          <div class="col-xs-12 col-md-6">
+            <md-input-container class="example-full-width form-ele-input">
+
+              <input mdInput placeholder="Last Name" [(ngModel)]="visa.lastname" #lastname="ngModel" name="lastname" required>
+              
+              <md-error *ngIf="lastname.errors && (lastname.dirty || lastname.touched)">
+                <div [hidden]="!lastname.errors.required">
+                  Last Name is required
+                </div>
+              </md-error>
+
+            </md-input-container>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+
+            <md2-datepicker name="birthdate"
+                      placeholder="Select Date"
+                      [(ngModel)]="date"
+                      [required]="isRequired"
+                      [disabled]="isDisabled"
+                      [openOnFocus]="isOpenOnFocus"
+                      [isOpen]="isOpen"
+                      [type]="type"
+                      [enableDates]="enableDates"
+                      [mode]="mode"
+                      [container]="container"
+                      #dateControl="ngModel"  class="example-full-width"  (click)="openDatepicker()"></md2-datepicker>
+
+<!--             <md-input-container class="example-full-width form-ele-input">
+              
+              <input mdInput placeholder="Date of Birth" [(ngModel)]="visa.dob" #dob="ngModel" name="dob" required>
+              
+              <md-error *ngIf="dob.errors && (dob.dirty || dob.touched)">
+                <div [hidden]="!dob.errors.required">
+                  Date of Birth is required
+                </div>
+              </md-error>
+
+            </md-input-container> -->
+
+          </div>
+            
+          <div class="col-xs-12 col-md-6">
+            <md-input-container class="example-full-width form-ele-input mar-top-4">
+              <input mdInput placeholder="Passport Number" [(ngModel)]="visa.passNumber" #passNumber="ngModel" name="passNumber" required>
+              
+              <md-error *ngIf="passNumber.errors && (passNumber.dirty || passNumber.touched)">
+                <div [hidden]="!passNumber.errors.required">
+                  Passport Number is required
+                </div>
+              </md-error>
+
+            </md-input-container>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <md-input-container class="example-full-width form-ele-input">
               <input mdInput placeholder="Passport Expiry Date">
             </md-input-container>
-          </md-grid-tile>
+          </div>
           
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
+          <div class="col-xs-12 col-md-6">
+            <md-input-container class="example-full-width form-ele-input">
               <input mdInput placeholder="Passport Issue Date">
             </md-input-container>
-          </md-grid-tile>
-        </md-grid-list>
+          </div>
+        </div>
 
-        <md-grid-list cols="2" rowHeight="100px">
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="Father Name">
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <md-input-container class="example-full-width form-ele-input">
+              <input mdInput placeholder="Father Name" [(ngModel)]="visa.fatherName" #fatherName="ngModel" name="fatherName" required>
+              
+              <md-error *ngIf="fatherName.errors && (fatherName.dirty || fatherName.touched)">
+                <div [hidden]="!fatherName.errors.required">
+                  Father name is required
+                </div>
+              </md-error>
+
             </md-input-container>
-          </md-grid-tile>
+          </div>
           
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="Mother Name">
-            </md-input-container>
-          </md-grid-tile>
-        </md-grid-list>
+          <div class="col-xs-12 col-md-6">
+            <md-input-container class="example-full-width form-ele-input">
+              <input mdInput placeholder="Mother Name" [(ngModel)]="visa.motherName" #motherName="ngModel" name="motherName" required>
+              
+              <md-error *ngIf="motherName.errors && (motherName.dirty || motherName.touched)">
+                <div [hidden]="!motherName.errors.required">
+                  Mother name is required
+                </div>
+              </md-error>
 
-        <md-grid-list cols="2" rowHeight="100px">
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="Email Address">
             </md-input-container>
-          </md-grid-tile>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <md-input-container class="example-full-width form-ele-input">
+              <input mdInput placeholder="Email Address" [(ngModel)]="visa.email" #email="ngModel" name="email" required email>
+              
+              <md-error *ngIf="email.errors && (email.dirty || email.touched)">
+                <div [hidden]="!email.errors.required">
+                  Email is required
+                </div>
+
+                <div [hidden]="email.errors.required || !email.errors.email">
+                  Enter valid email
+                </div>
+              </md-error>
+
+            </md-input-container>
+          </div>
           
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="Mobile Number">
-            </md-input-container>
-          </md-grid-tile>
-        </md-grid-list>
+          <div class="col-xs-12 col-md-6">
+            <md-input-container class="example-full-width form-ele-input">
+              <input mdInput placeholder="Mobile Number" [(ngModel)]="visa.mobileNum" #mobileNum="ngModel" name="mobileNum" required>
+              
+              <md-error *ngIf="mobileNum.errors && (mobileNum.dirty || mobileNum.touched)">
+                <div [hidden]="!mobileNum.errors.required">
+                  Mobile Number is required
+                </div>
+              </md-error>
 
-        <md-grid-list cols="2" rowHeight="100px">
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
+            </md-input-container>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <md-input-container class="example-full-width form-ele-input mar-top-4">
               <input mdInput placeholder="Gender">
             </md-input-container>
-          </md-grid-tile>
+          </div>
           
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="Country of Birth">
-            </md-input-container>
-          </md-grid-tile>
-        </md-grid-list>
+          <div class="col-xs-12 col-md-6">
+            <md-select placeholder="Country of Birth" [(ngModel)]="visa.cob" #cob="ngModel"  name="cob" class="example-full-width form-ele" required>
+              <md-option *ngFor="let country of countries" [value]="country.value">
+                {{country.viewValue}}
+              </md-option>
+            </md-select>
 
-        <md-grid-list cols="2" rowHeight="100px">
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="Nationality">
-            </md-input-container>
-          </md-grid-tile>
+            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-top: -1.5em;" *ngIf="cob.errors && (cob.dirty || cob.touched)">
+              <div class="" style="opacity: 1; transform: translateY(0%);">
+                <md-error>
+                  <div [hidden]="!cob.errors.required">
+                    Select Country of Birth
+                  </div>
+                </md-error>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <md-select placeholder="Nationality" [(ngModel)]="visa.nationality" #nationality="ngModel"  name="nationality" class="example-full-width form-ele" required>
+              <md-option *ngFor="let country of countries" [value]="country.value">
+                {{country.viewValue}}
+              </md-option>
+            </md-select>
+
+            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-top: -1.5em;" *ngIf="nationality.errors && (nationality.dirty || nationality.touched)">
+              <div class="" style="opacity: 1; transform: translateY(0%);">
+                <md-error>
+                  <div [hidden]="!nationality.errors.required">
+                    Select Nationality
+                  </div>
+                </md-error>
+              </div>
+            </div>
+            
+          </div>
           
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="Previous Nationality">
-            </md-input-container>
-          </md-grid-tile>
-        </md-grid-list>
+          <div class="col-xs-12 col-md-6">
+            <md-select placeholder="Previous Nationality" [(ngModel)]="visa.prevNationality" #prevNationality="ngModel"  name=" prevNationality" class="example-full-width form-ele" required>
+              <md-option *ngFor="let country of countries" [value]="country.value">
+                {{country.viewValue}}
+              </md-option>
+            </md-select>
 
-        <md-grid-list cols="2" rowHeight="100px">
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="Religion">
-            </md-input-container>
-          </md-grid-tile>
+            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-top: -1.5em;" *ngIf="prevNationality.errors && (prevNationality.dirty || prevNationality.touched)">
+              <div class="" style="opacity: 1; transform: translateY(0%);">
+                <md-error>
+                  <div [hidden]="!prevNationality.errors.required">
+                    Previous Nationality
+                  </div>
+                </md-error>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <md-select placeholder="Religion" [(ngModel)]="visa.religion" #religion="ngModel"  name="religion" class="example-full-width form-ele" required>
+              <md-option *ngFor="let religion of religions" [value]="religion.value">
+                {{religion.viewValue}}
+              </md-option>
+            </md-select>
+
+            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-top: -1.5em;" *ngIf="religion.errors && (religion.dirty || religion.touched)">
+              <div class="" style="opacity: 1; transform: translateY(0%);">
+                <md-error>
+                  <div [hidden]="!religion.errors.required">
+                    Select Religion
+                  </div>
+                </md-error>
+              </div>
+            </div>
+            
+          </div>
           
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="Maritial Status">
-            </md-input-container>
-          </md-grid-tile>
-        </md-grid-list>
+          <div class="col-xs-12 col-md-6">
+            <md-select placeholder="Maritial Status" [(ngModel)]="visa.maritialStatus" #maritialStatus="ngModel"  name="maritialStatus" class="example-full-width form-ele" required>
+              <md-option *ngFor="let mStatusOption of mStatusOptions" [value]="mStatusOption.value">
+                {{mStatusOption.viewValue}}
+              </md-option>
+            </md-select>
 
-        <md-grid-list cols="2" rowHeight="100px">
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="Education">
-            </md-input-container>
-          </md-grid-tile>
-          <md-grid-tile></md-grid-tile>
-        </md-grid-list>
+            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-top: -1.5em;" *ngIf="maritialStatus.errors && (maritialStatus.dirty || maritialStatus.touched)">
+              <div class="" style="opacity: 1; transform: translateY(0%);">
+                <md-error>
+                  <div [hidden]="!maritialStatus.errors.required">
+                    Select Maritial Status
+                  </div>
+                </md-error>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+          <md-select placeholder="Education" [(ngModel)]="visa.education" #education="ngModel"  name="education" class="example-full-width form-ele" required>
+            <md-option *ngFor="let education of eduOptions" [value]="education.value">
+              {{education.viewValue}}
+            </md-option>
+          </md-select>
+
+          <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-top: -1.5em;" *ngIf="education.errors && (education.dirty || education.touched)">
+            <div class="" style="opacity: 1; transform: translateY(0%);">
+              <md-error>
+                <div [hidden]="!education.errors.required">
+                  Select Education
+                </div>
+              </md-error>
+            </div>
+          </div>
+        </div>
+        </div>
 
       </form>
     </md-card>
@@ -281,71 +449,69 @@
     <md-card>
       <md-card-title>New Visa / Employment Visa / Urgent</md-card-title>
       <form class="example-form">
-        <md-grid-list cols="2" rowHeight="100px">
-          <md-grid-tile>
-            <md-select placeholder="Applicant Status" name="applicantStatus" class="example-full-width">
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <md-select placeholder="Applicant Status" [(ngModel)]="visa.applicantStatus" #applicantStatus="ngModel" name="applicantStatus" class="example-full-width form-ele" required>
               <md-option *ngFor="let appStatus of appStatusOptions" [value]="appStatus.value">
                 {{appStatus.viewValue}}
               </md-option>
             </md-select>
-          </md-grid-tile>
-          <md-grid-tile>
-            <md-select placeholder="Change of Status" name="changeStatus" class="example-full-width">
+
+            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-top: -1.5em;" *ngIf="applicantStatus.errors && (applicantStatus.dirty || applicantStatus.touched)">
+              <div class="" style="opacity: 1; transform: translateY(0%);">
+                <md-error>
+                  <div [hidden]="!applicantStatus.errors.required">
+                    Select Applicant Status
+                  </div>
+                </md-error>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <md-select placeholder="Change of Status" [(ngModel)]="visa.changeStatus" #changeStatus="ngModel" name="changeStatus" class="example-full-width form-ele" required>
               <md-option *ngFor="let changeStatus of changeOptions" [value]="changeStatus.value">
                 {{changeStatus.viewValue}}
               </md-option>
             </md-select>
-          </md-grid-tile>
-        </md-grid-list>
 
-        <md-grid-list cols="2" rowHeight="100px">
-          <md-grid-tile>
-            <md-select placeholder="Medical Service" name="medicalService" class="example-full-width">
+            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-top: -1.5em;" *ngIf="changeStatus.errors && (changeStatus.dirty || changeStatus.touched)">
+              <div class="" style="opacity: 1; transform: translateY(0%);">
+                <md-error>
+                  <div [hidden]="!changeStatus.errors.required">
+                    Change of Status is required.
+                  </div>
+                </md-error>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <md-select placeholder="Medical Service" [(ngModel)]="visa.medicalService" #medicalService="ngModel" name="medicalService" class="example-full-width form-ele" required>
               <md-option *ngFor="let medicalService of medicalServices" [value]="medicalService.value">
                 {{medicalService.viewValue}}
               </md-option>
             </md-select>
-          </md-grid-tile>
-          <md-grid-tile>
+
+            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-top: -1.5em;" *ngIf="medicalService.errors && (medicalService.dirty || medicalService.touched)">
+              <div class="" style="opacity: 1; transform: translateY(0%);">
+                <md-error>
+                  <div [hidden]="!medicalService.errors.required">
+                    Select Applicant Status
+                  </div>
+                </md-error>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-xs-12 col-md-6">
             
-          </md-grid-tile>
-        </md-grid-list>
+          </div>
+        </div>
 
-        <md-card-title>Job Offer Details</md-card-title>
-
-        <md-grid-list cols="2" rowHeight="100px">
-          <md-grid-tile>
-            <md-select placeholder="Contract Type" name="contractType" class="example-full-width">
-              <md-option *ngFor="let contractType of contractTypes" [value]="contractType.value">
-                {{contractType.viewValue}}
-              </md-option>
-            </md-select>
-          </md-grid-tile>
-          <md-grid-tile>
-            <md-select placeholder="Weekly Holidays" name="weeklyHoliday" class="example-full-width">
-              <md-option *ngFor="let weeklyHoliday of weeklyHolidays" [value]="weeklyHoliday.value">
-                {{weeklyHoliday.viewValue}}
-              </md-option>
-            </md-select>
-          </md-grid-tile>
-        </md-grid-list>
-
-        <md-grid-list cols="2" rowHeight="100px">
-          <md-grid-tile>
-            <md-select placeholder="Probation Period" name="probationPeriod" class="example-full-width">
-              <md-option *ngFor="let probationPeriod of probationPeriods" [value]="probationPeriod.value">
-                {{probationPeriod.viewValue}}
-              </md-option>
-            </md-select>
-          </md-grid-tile>
-          <md-grid-tile>
-            <md-select placeholder="Notice Period" name="noticePeriod" class="example-full-width">
-              <md-option *ngFor="let noticePeriod of noticePeriods" [value]="noticePeriod.value">
-                {{noticePeriod.viewValue}}
-              </md-option>
-            </md-select>
-          </md-grid-tile>
-        </md-grid-list>
 
       </form>
     </md-card>
@@ -375,58 +541,178 @@
     <md-card>
       <form class="example-form">
         
-        <md-grid-list cols="2" rowHeight="100px">
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="Designation">
-            </md-input-container>
-          </md-grid-tile>
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <md-select placeholder="Designation" [(ngModel)]="visa.designation" #designation="ngModel" name="designation" class="example-full-width form-ele" required>
+              <md-option *ngFor="let designation of designations" [value]="designation.value">
+                {{designation.viewValue}}
+              </md-option>
+            </md-select>
+
+            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-top: -1.5em;" *ngIf="designation.errors && (designation.dirty || designation.touched)">
+              <div class="" style="opacity: 1; transform: translateY(0%);">
+                <md-error>
+                  <div [hidden]="!contractType.errors.required">
+                    Select Designation
+                  </div>
+                </md-error>
+              </div>
+            </div>
+
+          </div>
           
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="Basic Salary">
+          <div class="col-xs-12 col-md-6">
+            <md-input-container class="example-full-width form-ele-input mar-top-4">
+              <input mdInput class="" placeholder="Basic Salary" [(ngModel)]="visa.basicSalary" #basicSalary="ngModel" name="basicSalary"  required>
+              
+              <md-error *ngIf="basicSalary.errors && (basicSalary.dirty || basicSalary.touched)">
+                <div [hidden]="!basicSalary.errors.required">
+                  Basic Salary is required
+                </div>
+              </md-error>
             </md-input-container>
-          </md-grid-tile>
-        </md-grid-list>
 
-        <md-grid-list cols="2" rowHeight="100px">
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="Housing Allowance">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <md-input-container class="example-full-width form-ele-input">
+              <input mdInput placeholder="Housing Allowance" [(ngModel)]="visa.housingAllowance" #housingAllowance="ngModel" name="housingAllowance"  required>
+              
+              <md-error *ngIf="housingAllowance.errors && (housingAllowance.dirty || housingAllowance.touched)">
+                <div [hidden]="!housingAllowance.errors.required">
+                  Housing Allowance is required
+                </div>
+              </md-error>
             </md-input-container>
-          </md-grid-tile>
+          </div>
           
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="Transport Allowance">
+          <div class="col-xs-12 col-md-6">
+            <md-input-container class="example-full-width form-ele-input">
+              <input mdInput placeholder="Transport Allowance" [(ngModel)]="visa.transportAllowance" #transportAllowance="ngModel" name="transportAllowance"  required>
+              
+              <md-error *ngIf="transportAllowance.errors && (transportAllowance.dirty || transportAllowance.touched)">
+                <div [hidden]="!transportAllowance.errors.required">
+                  Transport Allowance is required
+                </div>
+              </md-error>
             </md-input-container>
-          </md-grid-tile>
-        </md-grid-list>
+          </div>
+        </div>
 
-        <md-grid-list cols="2" rowHeight="100px">
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="Other">
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <md-input-container class="example-full-width form-ele-input">
+              <input mdInput placeholder="Other" [(ngModel)]="visa.otherAllowance" #otherAllowance="ngModel" name="otherAllowance">
+              
             </md-input-container>
-          </md-grid-tile>
+          </div>
           
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="Total Salary">
+          <div class="col-xs-12 col-md-6">
+            <md-input-container class="example-full-width form-ele-input">
+              <input mdInput placeholder="Total Salary" [(ngModel)]="visa.totalSalary" #totalSalary="ngModel" name="totalSalary"  required>
+              
+              <md-error *ngIf="totalSalary.errors && (totalSalary.dirty || totalSalary.touched)">
+                <div [hidden]="!totalSalary.errors.required">
+                  Transport Allowance is required
+                </div>
+              </md-error>
             </md-input-container>
-          </md-grid-tile>
-        </md-grid-list>
+          </div>
+        </div>
 
-        <md-card-title class="align-with-form">Courier Service</md-card-title>
 
-        <md-grid-list cols="1" rowHeight="100px">
-          <md-grid-tile>
-            <b class="align-with-form">Every visa application includes 1 free courier service and additional for AED 20 only. Please select below if you wish to use the pick and drop off service for cheque, Passport(s), Document(s), etc.</b>
-          </md-grid-tile>
-        </md-grid-list>
+        <md-card-title class="form-headings">Job Offer Details</md-card-title>
 
-        <section class="example-section align-with-form">
-          <md-checkbox class="example-margin" [(ngModel)]="checked">Documents Pick up</md-checkbox>
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <md-select placeholder="Contract Type" [(ngModel)]="visa.contractType" #contractType="ngModel" name="contractType" class="example-full-width form-ele" required>
+              <md-option *ngFor="let contractType of contractTypes" [value]="contractType.value">
+                {{contractType.viewValue}}
+              </md-option>
+            </md-select>
+
+            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-top: -1.5em;" *ngIf="contractType.errors && (contractType.dirty || contractType.touched)">
+              <div class="" style="opacity: 1; transform: translateY(0%);">
+                <md-error>
+                  <div [hidden]="!contractType.errors.required">
+                    Select Contract Type
+                  </div>
+                </md-error>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <md-select placeholder="Weekly Holidays" [(ngModel)]="visa.weeklyHoliday" #weeklyHoliday="ngModel" name="weeklyHoliday" class="example-full-width form-ele" required>
+              <md-option *ngFor="let weeklyHoliday of weeklyHolidays" [value]="weeklyHoliday.value">
+                {{weeklyHoliday.viewValue}}
+              </md-option>
+            </md-select>
+
+            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-top: -1.5em;" *ngIf="weeklyHoliday.errors && (weeklyHoliday.dirty || weeklyHoliday.touched)">
+              <div class="" style="opacity: 1; transform: translateY(0%);">
+                <md-error>
+                  <div [hidden]="!weeklyHoliday.errors.required">
+                    Select Weekly Holidays
+                  </div>
+                </md-error>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 col-md-6">
+            <md-select placeholder="Probation Period" [(ngModel)]="visa.probationPeriod" #probationPeriod="ngModel" name="probationPeriod" class="example-full-width form-ele" required>
+              <md-option *ngFor="let probationPeriod of probationPeriods" [value]="probationPeriod.value">
+                {{probationPeriod.viewValue}}
+              </md-option>
+            </md-select>
+
+            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-top: -1.5em;" *ngIf="probationPeriod.errors && (probationPeriod.dirty || probationPeriod.touched)">
+              <div class="" style="opacity: 1; transform: translateY(0%);">
+                <md-error>
+                  <div [hidden]="!probationPeriod.errors.required">
+                    Select Probation Period
+                  </div>
+                </md-error>
+              </div>
+            </div>
+
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <md-select placeholder="Notice Period" [(ngModel)]="visa.noticePeriod" #noticePeriod="ngModel" name="noticePeriod" class="example-full-width form-ele" required>
+              <md-option *ngFor="let noticePeriod of noticePeriods" [value]="noticePeriod.value">
+                {{noticePeriod.viewValue}}
+              </md-option>
+            </md-select>
+
+            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-top: -1.5em;" *ngIf="noticePeriod.errors && (noticePeriod.dirty || noticePeriod.touched)">
+              <div class="" style="opacity: 1; transform: translateY(0%);">
+                <md-error>
+                  <div [hidden]="!noticePeriod.errors.required">
+                    Select Notice Period
+                  </div>
+                </md-error>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <md-card-title class="form-headings">Courier Service</md-card-title>
+
+        <div class="row">
+          <div class="col-xs-12">
+            <b>Every visa application includes 1 free courier service and additional for AED 20 only. Please select below if you wish to use the pick and drop off service for cheque, Passport(s), Document(s), etc.</b>
+          </div>
+        </div>
+
+        <section class="example-section align-with-form mar-top-2">
+          <md-checkbox class="example-margin">Documents Pick up</md-checkbox>
         </section>
         <section class="example-section align-with-form">
           <md-checkbox class="example-margin">Cheque Collection</md-checkbox>
@@ -438,19 +724,33 @@
           <md-checkbox class="example-margin">Passport Drop up</md-checkbox>
         </section>
 
-        <md-grid-list cols="2" rowHeight="100px">
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="Authorized Person Name">
+        <div class="row mar-top-4">
+          <div class="col-xs-12 col-md-6">
+            <md-input-container class="example-full-width form-ele-input">
+              <input mdInput placeholder="Authorized Person Name" [(ngModel)]="visa.authName" #authName="ngModel" name="authName"  required>
+              
+              <md-error *ngIf="authName.errors && (authName.dirty || authName.touched)">
+                <div [hidden]="!authName.errors.required">
+                  Authorized Person Name is required
+                </div>
+              </md-error>
+
             </md-input-container>
-          </md-grid-tile>
+          </div>
           
-          <md-grid-tile>
-            <md-input-container class="example-full-width">
-              <input mdInput placeholder="Authorized Person Designation">
+          <div class="col-xs-12 col-md-6">
+            <md-input-container class="example-full-width form-ele-input">
+              <input mdInput placeholder="Authorized Person Designation" [(ngModel)]="visa.authDesignation" #authDesignation="ngModel" name="authDesignation"  required>
+              
+              <md-error *ngIf="authDesignation.errors && (authDesignation.dirty || authDesignation.touched)">
+                <div [hidden]="!authDesignation.errors.required">
+                  Authorized Person Designation is required
+                </div>
+              </md-error>
+
             </md-input-container>
-          </md-grid-tile>
-        </md-grid-list>
+          </div>
+        </div>
 
 
        
