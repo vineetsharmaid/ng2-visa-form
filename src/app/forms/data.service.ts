@@ -4,6 +4,14 @@ import { Injectable } from '@angular/core';
 
 export class DataService{
 
+	getGenders() {
+
+		return [
+			{ value: 1, viewValue: "Male" },
+			{ value: 2, viewValue: "Female" },
+		];
+	}
+
 	getEducationOptions() {
 
 		return [

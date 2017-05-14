@@ -1,3 +1,5 @@
+/*@import "node_modules/loaders.css/src/loaders";*/
+
 .container {
   display: flex;
   justify-content: center;

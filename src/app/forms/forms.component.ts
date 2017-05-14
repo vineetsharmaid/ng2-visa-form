@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import {IMyOptions} from 'mydatepicker';
 import { DataService } from './data.service';
 
+import 'loaders.css/loaders.min.css';
+
 export class VisaDetails {
 	orgName: string;
 	licenceNum: string;
@@ -102,24 +104,22 @@ export class FormsComponent{
     { value: '6', viewValue: '6 month' },
   ];
 
-  isRequired = false;
-  isDisabled = false;
+  isRequired 		= false;
+  isDisabled 		= false;
   isOpenOnFocus = false;
-  isOpen = false;
-  today: Date = new Date();
-  type: string = 'date';
-  types: Array<any> = [
-    { text: 'Date', value: 'date' },
-    { text: 'Time', value: 'time' },
-    { text: 'Date Time', value: 'datetime' }];
+  dobOpen 			= false;
+  expiryOpen 		= false;
+  issueOpen 		= false;
+  today: Date 	= new Date();
 
-  mode: string = 'portrait';
-
+  type: string 			= 'date';
+  mode: string 			= 'portrait';
   container: string = 'inline';
 
   date: Date 		= null;
   minDate: Date = null;
   maxDate: Date = null;
+
   enableDates: Array<Date> = [
     new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 7),
     new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate() - 1),
@@ -136,11 +136,16 @@ export class FormsComponent{
   // ];
   // disableWeekDays: Array<number> = [0, 6];
 
-  openDatepicker() {
-    this.isOpen = true;
+  dateField: string;
+
+  openDatepicker(dateField) {
+    dateField = true;
     setTimeout(() => {
-      this.isOpen = false;
-    }, 500);
+      dateField = false;
+    }, 1000);
+
+  	// form.controls[field];
+		// ctrl.markAsTouched();
   }
 
   setDate() {
@@ -155,6 +160,7 @@ export class FormsComponent{
   // }
 
 
+  public genders: Array<Object>;
   public countries: Array<Object>;
   public religions: Array<Object>;
   public mStatusOptions: Array<Object>;
@@ -174,11 +180,17 @@ export class FormsComponent{
 
   ngOnInit() {
     
+    this.loadGenders();
     this.loadCountries();
     this.loadReligions();
     this.loadMaritialStatus();
     this.loadEducationOptions();
     this.loadDesignations();
+  }
+
+  loadGenders() {
+
+  	this.genders = this._dataService.getGenders();
   }
 
   loadDesignations() {

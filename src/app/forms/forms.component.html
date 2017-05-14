@@ -1,3 +1,5 @@
+<!-- <loaders-css [loader]="'square-spin'" [loaderClass]="'my-loader'"></loaders-css> -->
+
 <md-tab-group [selectedIndex]="selectedTab">
   <md-tab label="Organization Details">
     <md-toolbar color="primary">
@@ -11,7 +13,7 @@
     </md-toolbar>
     
     <md-card>
-      <form class="example-form" #form="ngForm">
+      <form class="example-form" #orgForm="ngForm">
         
         <div class="row">
           <div class="col-xs-12 col-md-6">
@@ -126,7 +128,7 @@
     </md-card>
 
     <span class="done">
-      <button md-fab (click)="nextTab(form)">
+      <button md-fab (click)="nextTab(orgForm)">
         <md-icon>keyboard_arrow_right circle</md-icon>
       </button>
     </span>
@@ -144,7 +146,7 @@
     </md-toolbar>
       
     <md-card>
-      <form class="example-form">
+      <form class="example-form" #personalForm="ngForm">
         
         <div class="row">
           <div class="col-xs-12 col-md-6">
@@ -179,18 +181,26 @@
         <div class="row">
           <div class="col-xs-12 col-md-6">
 
-            <md2-datepicker name="birthdate"
-                      placeholder="Select Date"
-                      [(ngModel)]="date"
+            <md2-datepicker name="dob"
+                      placeholder="Date of Birth"
+                      [(ngModel)]="visa.dob"
+                      #dob="ngModel"  
                       [required]="isRequired"
                       [disabled]="isDisabled"
                       [openOnFocus]="isOpenOnFocus"
-                      [isOpen]="isOpen"
+                      [isOpen]="dobOpen"
                       [type]="type"
                       [enableDates]="enableDates"
                       [mode]="mode"
                       [container]="container"
-                      #dateControl="ngModel"  class="example-full-width"  (click)="openDatepicker()"></md2-datepicker>
+                      class="example-full-width" (click)="openDatepicker()" required></md2-datepicker>
+
+
+              <md-error *ngIf="dob.errors && (dob.dirty || dob.touched)">
+                <div [hidden]="!dob.errors.required">
+                  Date of Birth is required
+                </div>
+              </md-error>
 
 <!--             <md-input-container class="example-full-width form-ele-input">
               
@@ -222,15 +232,57 @@
 
         <div class="row">
           <div class="col-xs-12 col-md-6">
-            <md-input-container class="example-full-width form-ele-input">
+            <md2-datepicker name="expiryDate"
+                      placeholder="Passport Expiry Date"
+                      [(ngModel)]="visa.expiryDate"
+                      #expiryDate="ngModel"  
+                      [required]="isRequired"
+                      [disabled]="isDisabled"
+                      [openOnFocus]="isOpenOnFocus"
+                      [isOpen]="expiryOpen"
+                      [type]="type"
+                      [enableDates]="enableDates"
+                      [mode]="mode"
+                      [container]="container"
+                      class="example-full-width" (click)="openDatepicker()" required></md2-datepicker>
+
+
+              <md-error *ngIf="expiryDate.errors && (expiryDate.dirty || expiryDate.touched)">
+                <div [hidden]="!expiryDate.errors.required">
+                  Passport Expiry Date is required
+                </div>
+              </md-error>
+
+            <!-- <md-input-container class="example-full-width form-ele-input">
               <input mdInput placeholder="Passport Expiry Date">
-            </md-input-container>
+            </md-input-container> -->
           </div>
           
           <div class="col-xs-12 col-md-6">
-            <md-input-container class="example-full-width form-ele-input">
+            <md2-datepicker name="issueDate"
+                      placeholder="Passport Issue Date"
+                      [(ngModel)]="visa.issueDate"
+                      #issueDate="ngModel"  
+                      [required]="isRequired"
+                      [disabled]="isDisabled"
+                      [openOnFocus]="isOpenOnFocus"
+                      [isOpen]="issueOpen"
+                      [type]="type"
+                      [enableDates]="enableDates"
+                      [mode]="mode"
+                      [container]="container"
+                      class="example-full-width" (click)="openDatepicker()" required></md2-datepicker>
+
+
+              <md-error *ngIf="issueDate.errors && (issueDate.dirty || issueDate.touched)">
+                <div [hidden]="!issueDate.errors.required">
+                  Passport Expiry Date is required
+                </div>
+              </md-error>
+
+            <!-- <md-input-container class="example-full-width form-ele-input">
               <input mdInput placeholder="Passport Issue Date">
-            </md-input-container>
+            </md-input-container> -->
           </div>
         </div>
 
@@ -296,9 +348,22 @@
 
         <div class="row">
           <div class="col-xs-12 col-md-6">
-            <md-input-container class="example-full-width form-ele-input mar-top-4">
-              <input mdInput placeholder="Gender">
-            </md-input-container>
+
+            <md-select placeholder="Gender" [(ngModel)]="visa.gender" #gender="ngModel"  name="gender" class="example-full-width form-ele" required>
+              <md-option *ngFor="let gender of genders" [value]="gender.value">
+                {{gender.viewValue}}
+              </md-option>
+            </md-select>
+
+            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-top: -1.5em;" *ngIf="gender.errors && (gender.dirty || gender.touched)">
+              <div class="" style="opacity: 1; transform: translateY(0%);">
+                <md-error>
+                  <div [hidden]="!gender.errors.required">
+                    Select Gender
+                  </div>
+                </md-error>
+              </div>
+            </div>
           </div>
           
           <div class="col-xs-12 col-md-6">
@@ -429,7 +494,7 @@
       </button>
     </span>
     <span class="done">
-      <button md-fab (click)="nextTab()">
+      <button md-fab (click)="nextTab(personalForm)">
         <md-icon>keyboard_arrow_right circle</md-icon>
       </button>
     </span>
@@ -448,7 +513,7 @@
       
     <md-card>
       <md-card-title>New Visa / Employment Visa / Urgent</md-card-title>
-      <form class="example-form">
+      <form class="example-form" #visaForm="ngForm">
         <div class="row">
           <div class="col-xs-12 col-md-6">
             <md-select placeholder="Applicant Status" [(ngModel)]="visa.applicantStatus" #applicantStatus="ngModel" name="applicantStatus" class="example-full-width form-ele" required>
@@ -521,7 +586,7 @@
       </button>
     </span>
     <span class="done">
-      <button md-fab (click)="nextTab()">
+      <button md-fab (click)="nextTab(visaForm)">
         <md-icon>keyboard_arrow_right circle</md-icon>
       </button>
     </span>
@@ -539,7 +604,7 @@
     </md-toolbar>
     
     <md-card>
-      <form class="example-form">
+      <form class="example-form" #salaryForm="ngForm">
         
         <div class="row">
           <div class="col-xs-12 col-md-6">
@@ -758,7 +823,7 @@
     </md-card>
 
     <span class="done">
-      <button md-fab (click)="nextTab()">
+      <button md-fab (click)="nextTab(salaryForm)">
         <md-icon>keyboard_arrow_right circle</md-icon>
       </button>
     </span>

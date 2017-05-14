@@ -7,6 +7,7 @@ import { MaterialModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MyDatePickerModule } from 'mydatepicker';
 import { Md2Module }  from 'md2';
+import { LoadersCssModule } from 'angular2-loaders-css';
 // import { StoreModule } from '@ngrx/store';
 
 
@@ -38,6 +39,7 @@ import { Ng2MultiStepFormRoutingModule } from './app-routing.module';
     BrowserAnimationsModule,
     MyDatePickerModule,
     Md2Module.forRoot(),
+    LoadersCssModule,
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
