@@ -17,6 +17,8 @@ import { DataService } from './forms/data.service';
 import { OrganizationComponent } from './forms/organization/organization.component';
 import { PersonalComponent } from './forms/personal/personal.component';
 import { VisaComponent } from './forms/visa/visa.component';
+import {ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
+import {TooltipModule} from "ngx-tooltip";
 import 'hammerjs';
 
 import { Ng2MultiStepFormRoutingModule } from './app-routing.module';
@@ -26,7 +28,8 @@ import { Ng2MultiStepFormRoutingModule } from './app-routing.module';
     FormsComponent,
     OrganizationComponent,
     PersonalComponent,
-    VisaComponent
+    VisaComponent,
+    ImageCropperComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +43,7 @@ import { Ng2MultiStepFormRoutingModule } from './app-routing.module';
     MyDatePickerModule,
     Md2Module.forRoot(),
     LoadersCssModule,
+    TooltipModule,
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

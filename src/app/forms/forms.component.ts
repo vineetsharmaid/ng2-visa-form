@@ -1,8 +1,9 @@
-import { Component, ViewContainerRef } from '@angular/core';
+import { Component, ViewContainerRef, ViewChild } from '@angular/core';
 import { MdDialogConfig, MdDialog, MdDialogRef } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ImageCropperComponent, CropperSettings } from 'ng2-img-cropper';
 import { Router } from '@angular/router';
-import {IMyOptions} from 'mydatepicker';
+import { IMyOptions } from 'mydatepicker';
 import { DataService } from './data.service';
 
 import 'loaders.css/loaders.min.css';
@@ -15,12 +16,15 @@ export class VisaDetails {
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
-  styleUrls: ['./forms.component.css']
+  styleUrls: ['./forms.component.css'],	
 })
 export class FormsComponent{
 
 		form: FormGroup;
 		submitted: boolean;
+		customValid: boolean = true;
+		expError: string;
+
 		visa: VisaDetails = {
 			orgName: '',
 			licenceNum: '',
@@ -152,6 +156,36 @@ export class FormsComponent{
     this.date = new Date(this.today);
   }
 
+  checkExpiryDate(expDate, form) {
+
+  	let today = new Date();
+  	if( expDate.getTime() > today.getTime() ) {
+  		
+  		console.log( 'expDate is greater' );
+	  	var diff = Math.floor(expDate.getTime() - today.getTime());
+	    var day = 1000 * 60 * 60 * 24;
+
+	    var days = Math.floor(diff/day);
+	    var months = Math.floor(days/31);
+
+	    console.log('months', months);
+	    if( months < 6 ) {
+	    
+			 this.customValid = false;
+			 this.expError = "Passport expiry date should be after 6 months from current date."
+	    } else {
+
+			 this.customValid = true;
+			 this.expError = "";
+	    }
+  	} else {
+  		
+  		this.customValid = false;
+			this.expError = "Passport expiry date should be after 6 months from current date."
+  		console.log( 'today is greater' );
+  	}
+  }
+
   // setDateRange() {
   //   this.minDate = new Date(this.today);
   //   this.minDate.setMonth(this.minDate.getMonth() - 3);
@@ -159,7 +193,10 @@ export class FormsComponent{
   //   this.maxDate.setMonth(this.maxDate.getMonth() + 3);
   // }
 
-
+  cropperData: any;
+  cropperSettings: CropperSettings;
+  
+	@ViewChild('cropper', undefined) cropper:ImageCropperComponent;
   public genders: Array<Object>;
   public countries: Array<Object>;
   public religions: Array<Object>;
@@ -176,6 +213,18 @@ export class FormsComponent{
    	this.form = formBuilder.group({
     	// lastname: ['', Validators.required],
     });
+
+    this.cropperSettings = new CropperSettings();
+    this.cropperSettings.width = 200;
+    this.cropperSettings.height = 200;
+    this.cropperSettings.croppedWidth =200;
+    this.cropperSettings.croppedHeight = 200;
+    this.cropperSettings.canvasWidth = 400;
+    this.cropperSettings.canvasHeight = 300;
+    this.cropperSettings.noFileInput = true;
+
+    this.cropperData = {};
+
   }
 
   ngOnInit() {
@@ -240,7 +289,7 @@ export class FormsComponent{
 
   nextTab(form) {
    	
-    if(form.valid)
+    if(form.valid && this.customValid == true)
     {
 	  	this.submitted=true;
       
@@ -266,5 +315,23 @@ export class FormsComponent{
     this.selectedTab -= 1;
   	if (this.selectedTab == 0) this.selectedTab = 0;
   }
+
+   /**
+     * Used to send image to second cropper
+     * @param $event
+     */
+    fileChangeListener($event) {
+        var image:any = new Image();
+        var file:File = $event.target.files[0];
+        var myReader:FileReader = new FileReader();
+        var that = this;
+        myReader.onloadend = function (loadEvent:any) {
+            image.src = loadEvent.target.result;
+            that.cropper.setImage(image);
+
+        };
+
+        myReader.readAsDataURL(file);
+    }
 
 }
