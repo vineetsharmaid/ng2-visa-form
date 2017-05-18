@@ -34,10 +34,10 @@ export class DataService{
 
 		return [
 			{ value: 1, viewValue: "Islam" },
-			{ value: 1, viewValue: "Christianity" },
-			{ value: 1, viewValue: "Hinduism" },
-			{ value: 1, viewValue: "Sikhism" },
-			{ value: 1, viewValue: "Budhism" },
+			{ value: 2, viewValue: "Christianity" },
+			{ value: 3, viewValue: "Hinduism" },
+			{ value: 4, viewValue: "Sikhism" },
+			{ value: 5, viewValue: "Budhism" },
 		];
 	}
 

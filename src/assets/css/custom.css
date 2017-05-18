@@ -22,3 +22,68 @@ my-app:empty + .loading {
 }
 
 .custom-error { color: #f44336; font-size: 75%; }
+.mar-top-0 { margin-top: 0em !important; }
+
+    .bg-green{
+        background-color: #96c03d !important;
+    }
+    .table.table-bordered,
+    .table {
+        border: 1px solid #dadada;
+    }
+    .table.table-bordered thead > tr > th,
+    .table thead > tr > th {
+        font-weight: bold;
+        text-align: center;
+        background: #3F51B5;
+        color: #fff;
+        border-bottom-width: 1px;
+    }
+    .table.table-bordered tbody > tr:nth-child(odd),
+    .table tbody > tr:nth-child(odd) {
+        background-color: rgba(36, 39, 50, 0.05);
+        background: none \9;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0d242732', endColorstr='#0d242732');
+    }
+    .table.table-bordered tbody > tr:nth-child(odd):not([dummy]),
+    .table tbody > tr:nth-child(odd):not([dummy]) {
+        filter: progid:DXImageTransform.Microsoft.gradient(enabled='false');
+    }
+    .table.table-bordered tbody > tr > td,
+    .table tbody > tr > td,
+    .table.table-bordered tbody > tr > th,
+    .table tbody > tr > th,
+    .table.table-bordered tfoot > tr > td,
+    .table tfoot > tr > td,
+    .table.table-bordered tfoot > tr > th,
+    .table tfoot > tr > th,
+    .table.table-bordered thead > tr > td,
+    .table thead > tr > td,
+    .table.table-bordered thead > tr > th,
+    .table thead > tr > th {
+        border-color: #dadada;
+    }
+    .table.table-bordered tbody > tr:hover,
+    .table tbody > tr:hover {
+        background-color: rgba(36, 39, 50, 0.1);
+        background: none \9;
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1a242732', endColorstr='#1a242732');
+    }
+    .table.table-bordered tbody > tr:hover:not([dummy]),
+    .table tbody > tr:hover:not([dummy]) {
+        filter: progid:DXImageTransform.Microsoft.gradient(enabled='false');
+    }
+
+.max-wdth { max-width: 100% !important; }
+.shadow-effect { box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12); }
+.btn-clr { background-color:#FF4081 !important; color: #ffffff !important; }
+.disabled-tab { color: #BDBDBD !important; }
+
+
+
+
+
+
+
+
+

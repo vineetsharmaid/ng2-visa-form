@@ -11,6 +11,11 @@ import 'loaders.css/loaders.min.css';
 export class VisaDetails {
 	orgName: string;
 	licenceNum: string;
+	basicSalary: string;
+	housingAllowance: string;
+	transportAllowance: string;
+	otherAllowance: string;
+	// totalSalary: number;
 }
 
 @Component({
@@ -28,6 +33,11 @@ export class FormsComponent{
 		visa: VisaDetails = {
 			orgName: '',
 			licenceNum: '',
+			basicSalary: '',
+			housingAllowance: '',
+			transportAllowance: '',
+			otherAllowance: '',
+			// totalSalary: 0,
 		};
 
 	 tabLinks = [
@@ -159,31 +169,36 @@ export class FormsComponent{
   checkExpiryDate(expDate, form) {
 
   	let today = new Date();
-  	if( expDate.getTime() > today.getTime() ) {
+  	
+  	if( expDate != null ) {
+	  	
+	  	if( expDate.getTime() > today.getTime() ) {
+	  		
+	  		console.log( 'expDate is greater' );
+		  	var diff = Math.floor(expDate.getTime() - today.getTime());
+		    var day = 1000 * 60 * 60 * 24;
+
+		    var days = Math.floor(diff/day);
+		    var months = Math.floor(days/31);
+
+		    console.log('months', months);
+		    if( months < 6 ) {
+		    
+				 this.customValid = false;
+				 this.expError = "Passport expiry date should be after 6 months from current date."
+		    } else {
+
+				 this.customValid = true;
+				 this.expError = "";
+		    }
+	  	} else {
+	  		
+	  		this.customValid = false;
+				this.expError = "Passport expiry date should be after 6 months from current date."
+	  		console.log( 'today is greater' );
+	  	}
   		
-  		console.log( 'expDate is greater' );
-	  	var diff = Math.floor(expDate.getTime() - today.getTime());
-	    var day = 1000 * 60 * 60 * 24;
-
-	    var days = Math.floor(diff/day);
-	    var months = Math.floor(days/31);
-
-	    console.log('months', months);
-	    if( months < 6 ) {
-	    
-			 this.customValid = false;
-			 this.expError = "Passport expiry date should be after 6 months from current date."
-	    } else {
-
-			 this.customValid = true;
-			 this.expError = "";
-	    }
-  	} else {
-  		
-  		this.customValid = false;
-			this.expError = "Passport expiry date should be after 6 months from current date."
-  		console.log( 'today is greater' );
-  	}
+  	} // ends if exp date is not null
   }
 
   // setDateRange() {
@@ -227,6 +242,8 @@ export class FormsComponent{
 
   }
 
+  submittedData: Object;
+
   ngOnInit() {
     
     this.loadGenders();
@@ -235,6 +252,50 @@ export class FormsComponent{
     this.loadMaritialStatus();
     this.loadEducationOptions();
     this.loadDesignations();
+
+   //  this.submittedData = {
+			//  appStatus: "1",
+			//  appType: "5",
+			//  applicantStatus: "1",
+			//  authDesignation: "asdasdasd",
+			//  authName: "xcass",
+			//  basicSalary: "30",
+			//  changeStatus: "1",
+			//  cob: "AF",
+			//  contractType: "1",
+			//  designation: 1, 
+			//  dob: new Date(), 
+			//  education: 4, 
+			//  email: "ryvobaqe@hotmail.com",
+			//  expiryDate: new Date(), 
+			//  fatherName: "Uriel Rush",
+			//  firstname: "Celeste",
+			//  gender: 1, 
+			//  housingAllowance: "30",
+			//  issueDate: new Date(), 
+			//  lastname: "Michael",
+			//  licenceNum: "568",
+			//  maritialStatus: 1, 
+			//  medicalService: "4",
+			//  mobileNum: "830",
+			//  motherName: "Garth Gray",
+			//  nationality: "AF",
+			//  noticePeriod: "6",
+			//  orgName: "Grimes and Webster LLC",
+			//  otherAllowance: "30",
+			//  passNumber: "261",
+			//  prevNationality: "AF",
+			//  probationPeriod: "5",
+			//  processTime: "1",
+			//  religion: 1, 
+			//  totalSalary: "30",
+			//  transportAllowance: "30",
+			//  visaType: "1",
+			//  weeklyHoliday: "1"
+			//  };
+
+			// console.log('submittedData', this.submittedData);
+
   }
 
   loadGenders() {
@@ -267,22 +328,42 @@ export class FormsComponent{
   	this.countries = this._dataService.getCountries();
   }
 
-  onSubmit(form) {
+  calTotalSalary(value) {
   	
-    this.submitted=true;
-    // console.log(form.controls);
-    let field = '';
-    for( field in form.controls ) {
-    	const ctrl = form.controls[field];
-			ctrl.markAsTouched();
-    }
-    
-    if(form.valid)
+  	let basicSalary;
+		let housingAllowance;
+		let transportAllowance;
+		let otherAllowance;
+
+  	this.visa['basicSalary'] == '' ? basicSalary = 0: basicSalary = this.visa['basicSalary'];
+  	this.visa['housingAllowance'] == '' ? housingAllowance = 0: housingAllowance = this.visa['housingAllowance'];
+  	this.visa['transportAllowance'] == '' ? transportAllowance = 0: transportAllowance = this.visa['transportAllowance'];
+  	this.visa['otherAllowance'] == '' ? otherAllowance = 0: otherAllowance = this.visa['otherAllowance'];
+  	this.visa['totalSalary'] = ( parseInt(basicSalary) + parseInt(housingAllowance) + parseInt(transportAllowance) + parseInt(otherAllowance) );
+  	// this.visa['totalSalary'] += parseInt(value);
+  }
+
+  submitForm(form) {
+  	
+    if(form.valid && this.customValid == true)
     {
-      console.log('form submitted');
+	  	this.submitted = true;
+	  	this.submittedData = this.visa;
+      console.log('submittedData', this.submittedData);
+      // move to next tab
+	    // this.selectedTab += 1;
+	  	// if (this.selectedTab >= 4) this.selectedTab = 0;
+    
     } else {
-    	console.log('here');
+    	console.log('validation failed');
+    	let field = '';
+	    // set all field's state in form to touched to show errors on form submit
+	    for( field in form.controls ) {
+	    	const ctrl = form.controls[field];
+				ctrl.markAsTouched();
+	    }
     }
+
   }
 
 
@@ -292,7 +373,7 @@ export class FormsComponent{
     if(form.valid && this.customValid == true)
     {
 	  	this.submitted=true;
-      
+      console.log('visa', this.visa);
       // move to next tab
 	    this.selectedTab += 1;
 	  	if (this.selectedTab >= 4) this.selectedTab = 0;
