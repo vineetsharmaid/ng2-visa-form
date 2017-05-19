@@ -65,8 +65,8 @@ md-toolbar {
 }
 
 /deep/ .mat-tab-body {
-	overflow-y: hidden !important;
-	background: #f7f7f7;
+  overflow-y: hidden !important;
+  background: #f7f7f7;
 }
 
 .form-headings {

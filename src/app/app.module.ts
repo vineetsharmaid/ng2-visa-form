@@ -12,10 +12,14 @@ import { LoadersCssModule } from 'angular2-loaders-css';
 
 
 import { AppComponent } from './app.component';
+import { LandingComponent } from './landing/landing.component';
 import { FormsComponent } from './forms/forms.component';
 import { DataService } from './forms/data.service';
-import { OrganizationComponent } from './forms/organization/organization.component';
-import { PersonalComponent } from './forms/personal/personal.component';
+import { EmploymentVisaComponent } from './forms/employment-visa/employment-visa.component';
+import { TemporaryVisaComponent } from './forms/temporary-visa/temporary-visa.component';
+import { PartnerVisaComponent } from './forms/partner-visa/partner-visa.component';
+import { FamilyVisaComponent } from './forms/family-visa/family-visa.component';
+import { MaidVisaComponent } from './forms/maid-visa/maid-visa.component';
 import { VisaComponent } from './forms/visa/visa.component';
 import {ImageCropperComponent, CropperSettings, Bounds} from 'ng2-img-cropper';
 import {TooltipModule} from "ngx-tooltip";
@@ -25,9 +29,13 @@ import { Ng2MultiStepFormRoutingModule } from './app-routing.module';
 @NgModule({
   declarations: [
     AppComponent,
+    LandingComponent,
     FormsComponent,
-    OrganizationComponent,
-    PersonalComponent,
+    EmploymentVisaComponent,
+    TemporaryVisaComponent,
+    PartnerVisaComponent,
+    FamilyVisaComponent,
+    MaidVisaComponent,
     VisaComponent,
     ImageCropperComponent
   ],

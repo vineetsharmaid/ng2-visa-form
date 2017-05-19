@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Visa / Work Permit Request Form';
+  title = 'Online Visa & Work Permit Application Center';
 }

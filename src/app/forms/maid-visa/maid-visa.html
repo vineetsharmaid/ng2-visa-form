@@ -4,14 +4,14 @@
 <md-tab-group [selectedIndex]="selectedTab" *ngIf="!submittedData">
 <!-- <md-tab-group [selectedIndex]="selectedTab"> -->
 
-  <md-tab label="Organization Details">
+  <!-- <md-tab label="Organization Details">
     <md-toolbar color="primary">
       <span><md-icon>work</md-icon></span>
 
       <span class="center-txt">Organization Details</span>
 
       <button md-icon-button >
-        <!-- <md-icon>more_vert</md-icon> -->
+        
       </button>
     </md-toolbar>
 
@@ -155,7 +155,9 @@
       </button>
     </span>
   </md-tab>
-  
+   -->
+
+
   <md-tab label="Personal Details" [disabled]="true" class="disabled-tab">
     <md-toolbar color="primary">
       <span><md-icon>supervisor_account</md-icon></span>
@@ -166,7 +168,25 @@
         <!-- <md-icon>more_vert</md-icon> -->
       </button>
     </md-toolbar>
-  
+    
+    <md-card>
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+
+          <img-cropper #cropper [image]="cropperData" [settings]="cropperSettings"></img-cropper>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <div class="file-upload">
+              <span class="text">Choose your profile picture</span>
+              <input class="custom-input" type="file" (change)="fileChangeListener($event)">
+          </div>
+          <span class="result" *ngIf="cropperData.image" >
+            <img [src]="cropperData.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
+          </span>
+        </div>
+      </div>
+    </md-card>
+
     <md-card>
       <form class="example-form" #personalForm="ngForm">
         
@@ -515,11 +535,11 @@
 
       </form>
     </md-card>
-    <span class="back">
+    <!-- <span class="back">
       <button md-fab (click)="previousTab()">
         <md-icon>keyboard_arrow_left circle</md-icon>
       </button>
-    </span>
+    </span> -->
     <span class="done">
       <button md-fab (click)="nextTab(personalForm)">
         <md-icon>keyboard_arrow_right circle</md-icon>
@@ -883,7 +903,7 @@
       <img [src]="cropperData.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
     </span>
 
-    <table class="table table-bordered stripped shadow-effect">
+    <!-- <table class="table table-bordered stripped shadow-effect">
     <thead>
         <tr>
             <th colspan="2">Organization Details</th>
@@ -949,7 +969,7 @@
   <p>
       <button class="btn btn-clr" md-raised-button ng-click="editStep1()">Edit Step 1</button>
   </p>
-
+ -->
 <table class="table table-bordered shadow-effect">
     <thead>
     <tr>
@@ -1075,9 +1095,9 @@
     </tr>
     </tbody>
 </table>
-<p>
-    <button class="btn btn-clr" md-raised-button ng-click="editStep2()">Edit Step 2</button>
-</p>
+<!-- <p>
+    <button class="btn btn-clr" md-raised-button ng-click="editStep2()">Edit Step 1</button>
+</p> -->
 
 <table class="table table-bordered shadow-effect">
     <thead>
@@ -1119,9 +1139,9 @@
     </tr>
     </tbody>
 </table>
-<p>
-    <button class="btn btn-clr" md-raised-button ng-click="editStep3()">Edit Step 3</button>
-</p>
+<!-- <p>
+    <button class="btn btn-clr" md-raised-button ng-click="editStep3()">Edit Step 2</button>
+</p> -->
 
 <table class="table table-bordered shadow-effect">
     <thead>
@@ -1220,6 +1240,9 @@
     </tr>
     </tbody>
 </table>
+<!-- <p>
+    <button class="btn btn-clr" md-raised-button ng-click="editStep3()">Edit Step 3</button>
+</p> -->
 
 
 
