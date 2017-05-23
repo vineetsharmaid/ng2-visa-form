@@ -271,48 +271,50 @@ export class EmploymentVisaComponent {
     this.loadEducationOptions();
     this.loadDesignations();
 
-   //  this.submittedData = {
-      //  appStatus: "1",
-      //  appType: "5",
-      //  applicantStatus: "1",
-      //  authDesignation: "asdasdasd",
-      //  authName: "xcass",
-      //  basicSalary: "30",
-      //  changeStatus: "1",
-      //  cob: "AF",
-      //  contractType: "1",
-      //  designation: 1, 
-      //  dob: new Date(), 
-      //  education: 4, 
-      //  email: "ryvobaqe@hotmail.com",
-      //  expiryDate: new Date(), 
-      //  fatherName: "Uriel Rush",
-      //  firstname: "Celeste",
-      //  gender: 1, 
-      //  housingAllowance: "30",
-      //  issueDate: new Date(), 
-      //  lastname: "Michael",
-      //  licenceNum: "568",
-      //  maritialStatus: 1, 
-      //  medicalService: "4",
-      //  mobileNum: "830",
-      //  motherName: "Garth Gray",
-      //  nationality: "AF",
-      //  noticePeriod: "6",
-      //  orgName: "Grimes and Webster LLC",
-      //  otherAllowance: "30",
-      //  passNumber: "261",
-      //  prevNationality: "AF",
-      //  probationPeriod: "5",
-      //  processTime: "1",
-      //  religion: 1, 
-      //  totalSalary: "30",
-      //  transportAllowance: "30",
-      //  visaType: "1",
-      //  weeklyHoliday: "1"
-      //  };
 
-      // console.log('submittedData', this.submittedData);
+    // this.submitted     = true;
+    // this.submittedData = {
+    //    appStatus: "1",
+    //    appType: "5",
+    //    applicantStatus: "1",
+    //    authDesignation: "asdasdasd",
+    //    authName: "xcass",
+    //    basicSalary: "30",
+    //    changeStatus: "1",
+    //    cob: "AF",
+    //    contractType: "1",
+    //    designation: 1, 
+    //    dob: new Date(), 
+    //    education: 4, 
+    //    email: "ryvobaqe@hotmail.com",
+    //    expiryDate: new Date(), 
+    //    fatherName: "Uriel Rush",
+    //    firstname: "Celeste",
+    //    gender: 1, 
+    //    housingAllowance: "30",
+    //    issueDate: new Date(), 
+    //    lastname: "Michael",
+    //    licenceNum: "568",
+    //    maritialStatus: 1, 
+    //    medicalService: "4",
+    //    mobileNum: "830",
+    //    motherName: "Garth Gray",
+    //    nationality: "AF",
+    //    noticePeriod: "6",
+    //    orgName: "Grimes and Webster LLC",
+    //    otherAllowance: "30",
+    //    passNumber: "261",
+    //    prevNationality: "AF",
+    //    probationPeriod: "5",
+    //    processTime: "1",
+    //    religion: 1, 
+    //    totalSalary: "30",
+    //    transportAllowance: "30",
+    //    visaType: "1",
+    //    weeklyHoliday: "1"
+    //    };
+
+    //   console.log('submittedData', this.submittedData);
 
   }
 
@@ -368,10 +370,7 @@ export class EmploymentVisaComponent {
       this.submitted = true;
       this.submittedData = this.visa;
       console.log('submittedData', this.submittedData);
-      // move to next tab
-      // this.selectedTab += 1;
-      // if (this.selectedTab >= 4) this.selectedTab = 0;
-    
+     
     } else {
       console.log('validation failed');
       let field = '';
@@ -386,19 +385,23 @@ export class EmploymentVisaComponent {
 
 
 
-  nextTab(form) {
+  nextTab(form, step) {
      
     if(form.valid && this.customValid == true)
     {
-      this.submitted=true;
       console.log('visa', this.visa);
+
+      this.selectedTab = step;
+
       // move to next tab
       this.selectedTab += 1;
-      if (this.selectedTab >= 4) this.selectedTab = 0;
+
+      if (this.selectedTab >= 5) this.selectedTab = 0;
     
     } else {
-      console.log('validation failed');
+
       let field = '';
+      
       // set all field's state in form to touched to show errors on form submit
       for( field in form.controls ) {
         const ctrl = form.controls[field];
@@ -409,10 +412,17 @@ export class EmploymentVisaComponent {
 
   }
 
-  previousTab() {
+  previousTab(step) {
 
+    this.selectedTab  = step;
     this.selectedTab -= 1;
     if (this.selectedTab == 0) this.selectedTab = 0;
+  }
+
+  editStep(step) {
+
+    this.submitted   = false;
+    this.selectedTab = step;
   }
 
    /**

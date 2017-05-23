@@ -1,10 +1,11 @@
 <!-- <loaders-css [loader]="'square-spin'" [loaderClass]="'my-loader'"></loaders-css> -->
 
 
-<md-tab-group [selectedIndex]="selectedTab" *ngIf="!submittedData">
+<!-- <md-tab-group [selectedIndex]="selectedTab" *ngIf="!submittedData"> -->
+<md-tab-group [selectedIndex]="selectedTab" *ngIf="!submitted">
 <!-- <md-tab-group [selectedIndex]="selectedTab"> -->
 
-  <!-- <md-tab label="Organization Details">
+  <md-tab label="Organization Details">
     <md-toolbar color="primary">
       <span><md-icon>work</md-icon></span>
 
@@ -15,7 +16,7 @@
       </button>
     </md-toolbar>
 
-    <md-card>
+        <md-card>
       <div class="row">
         <div class="col-xs-12 col-md-6">
 
@@ -32,61 +33,12 @@
         </div>
       </div>
     </md-card>
+
+
     
     <md-card>
       <form class="example-form" #orgForm="ngForm">
-        
         <div class="row">
-          <div class="col-xs-12 col-md-6">
-            <md-input-container class="example-full-width form-ele-input">
-              
-
-              <input mdInput class="" placeholder="Organization Name" [(ngModel)]="visa.orgName" #orgName="ngModel" name="orgName" data-toggle="tooltip" title="Enter name of the organization" data-placement="right" required>
-              
-              <md-error *ngIf="orgName.errors && (orgName.dirty || orgName.touched)">
-                <div [hidden]="!orgName.errors.required">
-                  Organization name is required
-                </div>
-              </md-error>
-
-            </md-input-container>
-          </div>
-          
-          <div class="col-xs-12 col-md-6">
-            <md-input-container class="example-full-width form-ele-input">
-              
-              <input mdInput placeholder="Trade Licence Number" [(ngModel)]="visa.licenceNum" #licenceNum="ngModel" name="licenceNum" data-toggle="tooltip" title="Enter trade licence number" data-placement="right" required>
-
-              <md-error *ngIf="licenceNum.errors && (licenceNum.dirty || licenceNum.touched)">
-                <div [hidden]="!licenceNum.errors.required">
-                  Trade Licence Number is required
-                </div>
-              </md-error>
-
-            </md-input-container>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-xs-12 col-md-6">
-            
-            <md-select placeholder="Visa Type" name="visaType" class="example-full-width form-ele" [(ngModel)]="visa.visaType" #visaType="ngModel" name="visaType"  required>
-              <md-option *ngFor="let visaType of visaTypes" [value]="visaType.value">
-                {{visaType.viewValue}}
-              </md-option>
-            </md-select>
-            
-            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-top: -1.5em;" *ngIf="visaType.errors && (visaType.dirty || visaType.touched)">
-              <div class="" style="opacity: 1; transform: translateY(0%);">
-                <md-error>
-                  <div [hidden]="!visaType.errors.required">
-                    Select Visa Type
-                  </div>
-                </md-error>
-              </div>
-            </div>
-
-          </div>
           <div class="col-xs-12 col-md-6">
             <md-select placeholder="Applicant Status" name="appStatus" class="example-full-width form-ele" [(ngModel)]="visa.appStatus" #appStatus="ngModel" name="appStatus"  required>
               <md-option *ngFor="let status of applicantStatusOptions" [value]="status.value">
@@ -105,27 +57,7 @@
             </div>
 
           </div>
-        </div>
 
-        <div class="row">
-          <div class="col-xs-12 col-md-6">
-            <md-select placeholder="Type of Application" name="appType" class="example-full-width form-ele" [(ngModel)]="visa.appType" #appType="ngModel" name="appType"  required>
-              <md-option *ngFor="let appType of appTypes" [value]="appType.value">
-                {{appType.viewValue}}
-              </md-option>
-            </md-select>
-
-            <div class="mat-input-subscript-wrapper" ng-reflect-ng-switch="error" style="margin-top: -1.5em;" *ngIf="appType.errors && (appType.dirty || appType.touched)">
-              <div class="" style="opacity: 1; transform: translateY(0%);">
-                <md-error>
-                  <div [hidden]="!appType.errors.required">
-                    Select Type of Application
-                  </div>
-                </md-error>
-              </div>
-            </div>
-
-          </div>
           <div class="col-xs-12 col-md-6">
             <md-select placeholder="Processing Time" name="processTime" class="example-full-width form-ele" [(ngModel)]="visa.processTime" #processTime="ngModel" name="processTime"  required>
               <md-option *ngFor="let processTime of processTimes" [value]="processTime.value">
@@ -145,18 +77,15 @@
 
           </div>
         </div>
-
       </form>
     </md-card>
 
     <span class="done">
-      <button md-fab (click)="nextTab(orgForm)">
+      <button md-fab (click)="nextTab(orgForm, 0)">
         <md-icon>keyboard_arrow_right circle</md-icon>
       </button>
     </span>
   </md-tab>
-   -->
-
 
   <md-tab label="Personal Details" [disabled]="true" class="disabled-tab">
     <md-toolbar color="primary">
@@ -169,24 +98,6 @@
       </button>
     </md-toolbar>
     
-    <md-card>
-      <div class="row">
-        <div class="col-xs-12 col-md-6">
-
-          <img-cropper #cropper [image]="cropperData" [settings]="cropperSettings"></img-cropper>
-        </div>
-        <div class="col-xs-12 col-md-6">
-          <div class="file-upload">
-              <span class="text">Choose your profile picture</span>
-              <input class="custom-input" type="file" (change)="fileChangeListener($event)">
-          </div>
-          <span class="result" *ngIf="cropperData.image" >
-            <img [src]="cropperData.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
-          </span>
-        </div>
-      </div>
-    </md-card>
-
     <md-card>
       <form class="example-form" #personalForm="ngForm">
         
@@ -535,13 +446,13 @@
 
       </form>
     </md-card>
-    <!-- <span class="back">
-      <button md-fab (click)="previousTab()">
+    <span class="back">
+      <button md-fab (click)="previousTab(1)">
         <md-icon>keyboard_arrow_left circle</md-icon>
       </button>
-    </span> -->
+    </span>
     <span class="done">
-      <button md-fab (click)="nextTab(personalForm)">
+      <button md-fab (click)="nextTab(personalForm, 1)">
         <md-icon>keyboard_arrow_right circle</md-icon>
       </button>
     </span>
@@ -637,12 +548,12 @@
       </form>
     </md-card>
     <span class="back">
-      <button md-fab (click)="previousTab()">
+      <button md-fab (click)="previousTab(2)">
         <md-icon>keyboard_arrow_left circle</md-icon>
       </button>
     </span>
     <span class="done">
-      <button md-fab (click)="nextTab(visaForm)">
+      <button md-fab (click)="nextTab(visaForm, 2)">
         <md-icon>keyboard_arrow_right circle</md-icon>
       </button>
     </span>
@@ -831,7 +742,36 @@
 
           </div>
         </div>
+       
+      </form>
+    </md-card>
 
+    <span class="back">
+      <button md-fab (click)="previousTab(3)">
+        <md-icon>keyboard_arrow_left circle</md-icon>
+      </button>
+    </span>
+
+    <span class="done">
+      <button md-fab (click)="nextTab(salaryForm, 3)">
+        <md-icon>check circle</md-icon>
+      </button>
+    </span>
+  </md-tab>
+
+  <md-tab label="Acknowledgement" [disabled]="true" class="disabled-tab">
+    <md-toolbar color="primary">
+      <span><md-icon>work</md-icon></span>
+
+      <span class="center-txt">Acknowledgement</span>
+
+      <button md-icon-button >
+        <!-- <md-icon>more_vert</md-icon> -->
+      </button>
+    </md-toolbar>
+  
+    <md-card>
+      <form class="example-form" #acknowForm="ngForm">
         <md-card-title class="form-headings">Courier Service</md-card-title>
 
         <div class="row">
@@ -880,14 +820,11 @@
             </md-input-container>
           </div>
         </div>
-
-
-       
       </form>
     </md-card>
 
     <span class="done">
-      <button md-fab (click)="submitForm(salaryForm)">
+      <button md-fab (click)="submitForm(acknowForm)">
         <md-icon>check circle</md-icon>
       </button>
     </span>
@@ -896,14 +833,15 @@
 </md-tab-group>
 
 
-<md-card *ngIf="submittedData" class="max-wdth">
+<md-card *ngIf="submitted" class="max-wdth">
+<!-- <md-card *ngIf="submittedData" class="max-wdth"> -->
 <!-- <md-card class="max-wdth"> -->
     
     <span class="result" *ngIf="cropperData.image" >
       <img [src]="cropperData.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight">
     </span>
 
-    <!-- <table class="table table-bordered stripped shadow-effect">
+    <table class="table table-bordered stripped shadow-effect">
     <thead>
         <tr>
             <th colspan="2">Organization Details</th>
@@ -912,39 +850,11 @@
 
     <tbody>
         <tr>
-            <td class="col-xs-6">Organization Name</td>
-            <td class="col-xs-6"><p>{{submittedData.orgName}}</p></td>
-        </tr>
-        <tr>
-            <td class="col-xs-6">Trade License Number</td>
-            <td class="col-xs-6"><p>{{submittedData.licenceNum}}</p></td>
-        </tr>
-        <tr>
-            <td class="col-xs-6">Visa Type</td>
-            <td class="col-xs-6">
-              <p *ngFor="let vType of visaTypes">
-                <span *ngIf="submittedData.visaType == vType.value">
-                  {{vType.viewValue}}
-                </span>
-              </p>
-            </td>
-        </tr>
-        <tr>
             <td class="col-xs-6">Applicant Status</td>
             <td class="col-xs-6">
               <p *ngFor="let applicantStatusOption of applicantStatusOptions">
                 <span *ngIf="submittedData.applicantStatus == applicantStatusOption.value">
                   {{applicantStatusOption.viewValue}}
-                </span>
-              </p>
-            </td>
-        </tr>
-        <tr>
-            <td class="col-xs-6">Type of Application</td>
-            <td class="col-xs-6">
-              <p *ngFor="let aType of appTypes">
-                <span *ngIf="submittedData.appType == aType.value">
-                  {{aType.viewValue}}
                 </span>
               </p>
             </td>
@@ -959,17 +869,17 @@
               </p>
             </td>
         </tr>
-        <tr>
+        <!-- <tr>
             <td class="col-xs-6">Documents</td>
             <td class="col-xs-6">Color Picture in white background<br>
                 Scanned colored passport copy</td>
-        </tr>
+        </tr> -->
     </tbody>
   </table>
   <p>
-      <button class="btn btn-clr" md-raised-button ng-click="editStep1()">Edit Step 1</button>
+      <button class="btn btn-clr" md-raised-button (click)="editStep(0)">Edit Step 1</button>
   </p>
- -->
+
 <table class="table table-bordered shadow-effect">
     <thead>
     <tr>
@@ -1095,9 +1005,9 @@
     </tr>
     </tbody>
 </table>
-<!-- <p>
-    <button class="btn btn-clr" md-raised-button ng-click="editStep2()">Edit Step 1</button>
-</p> -->
+<p>
+    <button class="btn btn-clr" md-raised-button (click)="editStep(1)">Edit Step 2</button>
+</p>
 
 <table class="table table-bordered shadow-effect">
     <thead>
@@ -1139,9 +1049,9 @@
     </tr>
     </tbody>
 </table>
-<!-- <p>
-    <button class="btn btn-clr" md-raised-button ng-click="editStep3()">Edit Step 2</button>
-</p> -->
+<p>
+    <button class="btn btn-clr" md-raised-button (click)="editStep(2)">Edit Step 3</button>
+</p>
 
 <table class="table table-bordered shadow-effect">
     <thead>
@@ -1240,10 +1150,40 @@
     </tr>
     </tbody>
 </table>
-<!-- <p>
-    <button class="btn btn-clr" md-raised-button ng-click="editStep3()">Edit Step 3</button>
-</p> -->
+<p>
+    <button class="btn btn-clr" md-raised-button (click)="editStep(3)">Edit Step 4</button>
+</p>
 
 
+<table class="table table-bordered shadow-effect">
+    <thead>
+    <tr>
+        <th colspan="2">Acknowledgement</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+        <td class="col-xs-6">Courier Service</td>
+        <td class="col-xs-6">
+            Documents Pick up<br/>
+            Cheque Collection<br/>
+            Passport Pick up<br/>
+            Passport Drop up<br/>
+        </td>
+    </tr>
+    <tr>
+        <td class="col-xs-6">Authorized Person Name</td>
+        <td class="col-xs-6"><p>{{submittedData.authName}}</p></td>
+    </tr>
+    <tr>
+        <td class="col-xs-6">Authorized Person Designation</td>
+        <td class="col-xs-6"><p>{{submittedData.authDesignation}}</p></td>
+    </tr>
+    </tbody>
+</table>
+<p>
+    <button class="btn btn-clr" md-raised-button (click)="editStep(4)">Edit Step 5</button>
+</p>
 
 </md-card>

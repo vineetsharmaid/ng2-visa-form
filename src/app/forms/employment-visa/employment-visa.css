@@ -133,3 +133,11 @@ left: 0;
 opacity: 0;
 cursor: pointer;
 }
+
+.completer-dropdown-holder { overflow-y: scroll !important; }
+
+
+
+
+
+

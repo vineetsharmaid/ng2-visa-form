@@ -25,22 +25,30 @@ export class VisaDetails {
 })
 export class FormsComponent{
 
-		form: FormGroup;
-		submitted: boolean;
-		customValid: boolean = true;
-		expError: string;
+  orgName: string;
+  licenceNum: string;
+  basicSalary: string;
+  housingAllowance: string;
+  transportAllowance: string;
+  otherAllowance: string;
+  // totalSalary: number;
 
-		visa: VisaDetails = {
-			orgName: '',
-			licenceNum: '',
-			basicSalary: '',
-			housingAllowance: '',
-			transportAllowance: '',
-			otherAllowance: '',
-			// totalSalary: 0,
-		};
+    form: FormGroup;
+    submitted: boolean;
+    customValid: boolean = true;
+    expError: string;
 
-	 tabLinks = [
+    visa: VisaDetails = {
+      orgName: '',
+      licenceNum: '',
+      basicSalary: '',
+      housingAllowance: '',
+      transportAllowance: '',
+      otherAllowance: '',
+      // totalSalary: 0,
+    };
+
+   tabLinks = [
     {label: 'Organization Details', link: 'organization'},
     {label: 'Personal Details', link: 'personal'},    
     {label: 'Visa Details', link: 'visa'},
@@ -118,19 +126,19 @@ export class FormsComponent{
     { value: '6', viewValue: '6 month' },
   ];
 
-  isRequired 		= false;
-  isDisabled 		= false;
+  isRequired     = false;
+  isDisabled     = false;
   isOpenOnFocus = false;
-  dobOpen 			= false;
-  expiryOpen 		= false;
-  issueOpen 		= false;
-  today: Date 	= new Date();
+  dobOpen       = false;
+  expiryOpen     = false;
+  issueOpen     = false;
+  today: Date   = new Date();
 
-  type: string 			= 'date';
-  mode: string 			= 'portrait';
+  type: string       = 'date';
+  mode: string       = 'portrait';
   container: string = 'inline';
 
-  date: Date 		= null;
+  date: Date     = null;
   minDate: Date = null;
   maxDate: Date = null;
 
@@ -158,8 +166,8 @@ export class FormsComponent{
       dateField = false;
     }, 1000);
 
-  	// form.controls[field];
-		// ctrl.markAsTouched();
+    // form.controls[field];
+    // ctrl.markAsTouched();
   }
 
   setDate() {
@@ -168,37 +176,37 @@ export class FormsComponent{
 
   checkExpiryDate(expDate, form) {
 
-  	let today = new Date();
-  	
-  	if( expDate != null ) {
-	  	
-	  	if( expDate.getTime() > today.getTime() ) {
-	  		
-	  		console.log( 'expDate is greater' );
-		  	var diff = Math.floor(expDate.getTime() - today.getTime());
-		    var day = 1000 * 60 * 60 * 24;
+    let today = new Date();
+    
+    if( expDate != null ) {
+      
+      if( expDate.getTime() > today.getTime() ) {
+        
+        console.log( 'expDate is greater' );
+        var diff = Math.floor(expDate.getTime() - today.getTime());
+        var day = 1000 * 60 * 60 * 24;
 
-		    var days = Math.floor(diff/day);
-		    var months = Math.floor(days/31);
+        var days = Math.floor(diff/day);
+        var months = Math.floor(days/31);
 
-		    console.log('months', months);
-		    if( months < 6 ) {
-		    
-				 this.customValid = false;
-				 this.expError = "Passport expiry date should be after 6 months from current date."
-		    } else {
+        console.log('months', months);
+        if( months < 6 ) {
+        
+         this.customValid = false;
+         this.expError = "Passport expiry date should be after 6 months from current date."
+        } else {
 
-				 this.customValid = true;
-				 this.expError = "";
-		    }
-	  	} else {
-	  		
-	  		this.customValid = false;
-				this.expError = "Passport expiry date should be after 6 months from current date."
-	  		console.log( 'today is greater' );
-	  	}
-  		
-  	} // ends if exp date is not null
+         this.customValid = true;
+         this.expError = "";
+        }
+      } else {
+        
+        this.customValid = false;
+        this.expError = "Passport expiry date should be after 6 months from current date."
+        console.log( 'today is greater' );
+      }
+      
+    } // ends if exp date is not null
   }
 
   // setDateRange() {
@@ -211,7 +219,7 @@ export class FormsComponent{
   cropperData: any;
   cropperSettings: CropperSettings;
   
-	@ViewChild('cropper', undefined) cropper:ImageCropperComponent;
+  @ViewChild('cropper', undefined) cropper:ImageCropperComponent;
   public genders: Array<Object>;
   public countries: Array<Object>;
   public religions: Array<Object>;
@@ -224,9 +232,9 @@ export class FormsComponent{
   };
 
   constructor( private formBuilder: FormBuilder, private router: Router, private _dataService: DataService ) { 
-		this.submitted=false;
-   	this.form = formBuilder.group({
-    	// lastname: ['', Validators.required],
+    this.submitted=false;
+     this.form = formBuilder.group({
+      // lastname: ['', Validators.required],
     });
 
     this.cropperSettings = new CropperSettings();
@@ -253,148 +261,158 @@ export class FormsComponent{
     this.loadEducationOptions();
     this.loadDesignations();
 
-   //  this.submittedData = {
-			//  appStatus: "1",
-			//  appType: "5",
-			//  applicantStatus: "1",
-			//  authDesignation: "asdasdasd",
-			//  authName: "xcass",
-			//  basicSalary: "30",
-			//  changeStatus: "1",
-			//  cob: "AF",
-			//  contractType: "1",
-			//  designation: 1, 
-			//  dob: new Date(), 
-			//  education: 4, 
-			//  email: "ryvobaqe@hotmail.com",
-			//  expiryDate: new Date(), 
-			//  fatherName: "Uriel Rush",
-			//  firstname: "Celeste",
-			//  gender: 1, 
-			//  housingAllowance: "30",
-			//  issueDate: new Date(), 
-			//  lastname: "Michael",
-			//  licenceNum: "568",
-			//  maritialStatus: 1, 
-			//  medicalService: "4",
-			//  mobileNum: "830",
-			//  motherName: "Garth Gray",
-			//  nationality: "AF",
-			//  noticePeriod: "6",
-			//  orgName: "Grimes and Webster LLC",
-			//  otherAllowance: "30",
-			//  passNumber: "261",
-			//  prevNationality: "AF",
-			//  probationPeriod: "5",
-			//  processTime: "1",
-			//  religion: 1, 
-			//  totalSalary: "30",
-			//  transportAllowance: "30",
-			//  visaType: "1",
-			//  weeklyHoliday: "1"
-			//  };
 
-			// console.log('submittedData', this.submittedData);
+    // this.submitted     = true;
+    // this.submittedData = {
+    //    appStatus: "1",
+    //    appType: "5",
+    //    applicantStatus: "1",
+    //    authDesignation: "asdasdasd",
+    //    authName: "xcass",
+    //    basicSalary: "30",
+    //    changeStatus: "1",
+    //    cob: "AF",
+    //    contractType: "1",
+    //    designation: 1, 
+    //    dob: new Date(), 
+    //    education: 4, 
+    //    email: "ryvobaqe@hotmail.com",
+    //    expiryDate: new Date(), 
+    //    fatherName: "Uriel Rush",
+    //    firstname: "Celeste",
+    //    gender: 1, 
+    //    housingAllowance: "30",
+    //    issueDate: new Date(), 
+    //    lastname: "Michael",
+    //    licenceNum: "568",
+    //    maritialStatus: 1, 
+    //    medicalService: "4",
+    //    mobileNum: "830",
+    //    motherName: "Garth Gray",
+    //    nationality: "AF",
+    //    noticePeriod: "6",
+    //    orgName: "Grimes and Webster LLC",
+    //    otherAllowance: "30",
+    //    passNumber: "261",
+    //    prevNationality: "AF",
+    //    probationPeriod: "5",
+    //    processTime: "1",
+    //    religion: 1, 
+    //    totalSalary: "30",
+    //    transportAllowance: "30",
+    //    visaType: "1",
+    //    weeklyHoliday: "1"
+    //    };
+
+    //   console.log('submittedData', this.submittedData);
 
   }
 
   loadGenders() {
 
-  	this.genders = this._dataService.getGenders();
+    this.genders = this._dataService.getGenders();
   }
 
   loadDesignations() {
 
-  	this.designations = this._dataService.getDesignations();
+    this.designations = this._dataService.getDesignations();
   }
 
   loadEducationOptions() {
 
-  	this.eduOptions = this._dataService.getEducationOptions();
+    this.eduOptions = this._dataService.getEducationOptions();
   }
 
   loadMaritialStatus() {
 
-  	this.mStatusOptions = this._dataService.getMaritialStatus();
+    this.mStatusOptions = this._dataService.getMaritialStatus();
   }
 
   loadReligions() {
 
-  	this.religions = this._dataService.getReligion();
+    this.religions = this._dataService.getReligion();
   }
 
   loadCountries() {
-  	// loads list of countries
-  	this.countries = this._dataService.getCountries();
+    // loads list of countries
+    this.countries = this._dataService.getCountries();
   }
 
   calTotalSalary(value) {
-  	
-  	let basicSalary;
-		let housingAllowance;
-		let transportAllowance;
-		let otherAllowance;
+    
+    let basicSalary;
+    let housingAllowance;
+    let transportAllowance;
+    let otherAllowance;
 
-  	this.visa['basicSalary'] == '' ? basicSalary = 0: basicSalary = this.visa['basicSalary'];
-  	this.visa['housingAllowance'] == '' ? housingAllowance = 0: housingAllowance = this.visa['housingAllowance'];
-  	this.visa['transportAllowance'] == '' ? transportAllowance = 0: transportAllowance = this.visa['transportAllowance'];
-  	this.visa['otherAllowance'] == '' ? otherAllowance = 0: otherAllowance = this.visa['otherAllowance'];
-  	this.visa['totalSalary'] = ( parseInt(basicSalary) + parseInt(housingAllowance) + parseInt(transportAllowance) + parseInt(otherAllowance) );
-  	// this.visa['totalSalary'] += parseInt(value);
+    this.visa['basicSalary'] == '' ? basicSalary = 0: basicSalary = this.visa['basicSalary'];
+    this.visa['housingAllowance'] == '' ? housingAllowance = 0: housingAllowance = this.visa['housingAllowance'];
+    this.visa['transportAllowance'] == '' ? transportAllowance = 0: transportAllowance = this.visa['transportAllowance'];
+    this.visa['otherAllowance'] == '' ? otherAllowance = 0: otherAllowance = this.visa['otherAllowance'];
+    this.visa['totalSalary'] = ( parseInt(basicSalary) + parseInt(housingAllowance) + parseInt(transportAllowance) + parseInt(otherAllowance) );
+    // this.visa['totalSalary'] += parseInt(value);
   }
 
   submitForm(form) {
-  	
+    
     if(form.valid && this.customValid == true)
     {
-	  	this.submitted = true;
-	  	this.submittedData = this.visa;
+      this.submitted = true;
+      this.submittedData = this.visa;
       console.log('submittedData', this.submittedData);
-      // move to next tab
-	    // this.selectedTab += 1;
-	  	// if (this.selectedTab >= 4) this.selectedTab = 0;
-    
+     
     } else {
-    	console.log('validation failed');
-    	let field = '';
-	    // set all field's state in form to touched to show errors on form submit
-	    for( field in form.controls ) {
-	    	const ctrl = form.controls[field];
-				ctrl.markAsTouched();
-	    }
+      console.log('validation failed');
+      let field = '';
+      // set all field's state in form to touched to show errors on form submit
+      for( field in form.controls ) {
+        const ctrl = form.controls[field];
+        ctrl.markAsTouched();
+      }
     }
 
   }
 
 
 
-  nextTab(form) {
-   	
+  nextTab(form, step) {
+     
     if(form.valid && this.customValid == true)
     {
-	  	this.submitted=true;
       console.log('visa', this.visa);
+
+      this.selectedTab = step;
+
       // move to next tab
-	    this.selectedTab += 1;
-	  	if (this.selectedTab >= 4) this.selectedTab = 0;
+      this.selectedTab += 1;
+
+      if (this.selectedTab >= 5) this.selectedTab = 0;
     
     } else {
-    	console.log('validation failed');
-    	let field = '';
-	    // set all field's state in form to touched to show errors on form submit
-	    for( field in form.controls ) {
-	    	const ctrl = form.controls[field];
-				ctrl.markAsTouched();
-	    }
+
+      let field = '';
+      
+      // set all field's state in form to touched to show errors on form submit
+      for( field in form.controls ) {
+        const ctrl = form.controls[field];
+        ctrl.markAsTouched();
+      }
     }
 
 
   }
 
-  previousTab() {
+  previousTab(step) {
 
+    this.selectedTab  = step;
     this.selectedTab -= 1;
-  	if (this.selectedTab == 0) this.selectedTab = 0;
+    if (this.selectedTab == 0) this.selectedTab = 0;
+  }
+
+  editStep(step) {
+
+    this.submitted   = false;
+    this.selectedTab = step;
   }
 
    /**
